@@ -1,15 +1,15 @@
-matomeru-kun
+clouddeck
 ====
 
 Follow these steps to get started:
 
 1. Git-clone this repository.
 
-        $ git clone git://github.com/chidakiyo/matomeru-kun.git matomeru-kun
+        $ git clone git://github.com/chidakiyo/clouddeck.git clouddeck
 
 2. Change directory into your clone:
 
-        $ cd matomeru-kun
+        $ cd clouddeck
 
 3. Launch SBT:
 
