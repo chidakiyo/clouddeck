@@ -1,4 +1,4 @@
-organization  := "matomeru"
+organization  := "clouddeck"
 
 version       := "0.1"
 

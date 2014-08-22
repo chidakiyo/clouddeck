@@ -1,4 +1,4 @@
-package matomeru.command
+package clouddeck.command
 
 import scala.sys.process._
 

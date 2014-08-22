@@ -1,4 +1,4 @@
-package matomeru.command
+package clouddeck.command
 
 object VMCommandBuilder {
 

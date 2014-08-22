@@ -1,4 +1,4 @@
-package matomeru.service
+package clouddeck.service
 
 import akka.actor.Actor
 import spray.routing._

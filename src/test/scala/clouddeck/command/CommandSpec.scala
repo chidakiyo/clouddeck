@@ -1,4 +1,4 @@
-package matomeru.command
+package clouddeck.command
 
 import org.specs2.mutable.Specification
 

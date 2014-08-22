@@ -1,7 +1,7 @@
-package matomeru.command
+package clouddeck.command
 
 import org.specs2.mutable.Specification
-import matomeru.command.VMCommandBuilder._
+import clouddeck.command.VMCommandBuilder._
 
 class VMCommandBuilderSpec extends Specification {
 
