@@ -16,4 +16,5 @@ object Boot extends App {
   IO(Http) ? Http.Bind(service, interface = "localhost", port = 8080)
 
   List(new File(_root_.util.Directory.AppHome)).filter(!_.exists).foreach(_.mkdirs)
+  List(_root_.util.Directory.AppConf).filter(!_.exists).foreach(_.createNewFile())
 }
