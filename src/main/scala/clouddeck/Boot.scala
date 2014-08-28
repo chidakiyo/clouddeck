@@ -15,5 +15,5 @@ object Boot extends App {
   implicit val timeout = Timeout(5.seconds)
   IO(Http) ? Http.Bind(service, interface = "localhost", port = 8080)
 
-  //  List(new File(_root_.util.Directory.AppHome)).filter(!_.exists).foreach(_.mkdirs)
+  List(new File(_root_.util.Directory.AppHome)).filter(!_.exists).foreach(_.mkdirs)
 }
