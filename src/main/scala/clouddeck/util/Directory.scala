@@ -1,7 +1,6 @@
 package util
 
 import java.io.File
-import util.ControlUtil._
 import org.apache.commons.io.FileUtils
 import java.lang.System._
 
