@@ -1,20 +1,17 @@
 package clouddeck.util
 
+import FileUtil.readAll
+import JsonUtil.parseNamedConnectInfosJson
 import clouddeck.command.ConnectInfo
 import util.Directory
-import scala.io.Source
-import util.ControlUtil._
 
 object ConfigUtil {
 
-  def find(host: String): Option[ConnectInfo] = JsonUtil.parseNamedConnectInfosJson(conf()).root.find(_.host == host)
+  def find(host: String): Option[ConnectInfo] = connectInfos().find(_.host == host)
 
-  def find(): List[ConnectInfo] = JsonUtil.parseNamedConnectInfosJson(conf()).root
+  def find(): List[ConnectInfo] = connectInfos()
 
-  def conf(): String = {
-    using(Source.fromFile(Directory.AppConf)) { source =>
-      source.mkString
-    }
-  }
+  def conf(): String = readAll(Directory.AppConf)
 
+  def connectInfos(): List[ConnectInfo] = parseNamedConnectInfosJson(conf()).root
 }
