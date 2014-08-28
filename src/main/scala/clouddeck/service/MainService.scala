@@ -6,7 +6,7 @@ import spray.http._
 import spray.http.MediaTypes._
 import spray.httpx.marshalling.ToResponseMarshallable.isMarshallable
 import spray.routing.Directive.pimpApply
-
+import spray.routing.directives.CachingDirectives._
 import spray.json._
 import DefaultJsonProtocol._
 
@@ -17,7 +17,7 @@ class MyServiceActor extends Actor with MainService {
 
 trait MainService extends HttpService {
 
-  val myRoute =
+  val myRoute = {
     path("") {
       get {
         respondWithMediaType(`application/json`) {
@@ -27,5 +27,16 @@ trait MainService extends HttpService {
           }
         }
       }
-    }
+    } ~
+      path("list" / """.+""".r) { id =>
+        get {
+          respondWithMediaType(`application/json`) {
+            complete {
+              val jsonAst = List(id).toJson
+              jsonAst.prettyPrint
+            }
+          }
+        }
+      }
+  }
 }
