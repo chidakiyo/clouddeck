@@ -125,14 +125,6 @@ object VMCommandBuilder {
 
   // base
 
-  private def vcBase(info: ConnectInfo): String = {
-    s"$vc ${base(info)}"
-  }
-
-  private def vhBase(info: ConnectInfo): String = {
-    s"$vh ${base(info)}"
-  }
-
   private def fsBase(info: ConnectInfo): String = {
     s"$fs ${base(info)}"
   }
