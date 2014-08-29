@@ -1,10 +1,10 @@
 package clouddeck.command
 
+import clouddeck.command.Commands._
+
 object VMCommandBuilder {
 
   val dq = """""""
-  val vc = "vmware-cmd"
-  val vh = "vicfg-hostops"
   val fs = "vifs"
   val es = "esxcli"
 
@@ -12,66 +12,66 @@ object VMCommandBuilder {
 
   /** ESXi host information */
   def hostInfo()(implicit info: ConnectInfo): String = {
-    s"${vhBase(info)} --operation info"
+    s"${VICFG_HOSTOPS.cmdAndOpt(info)} --operation info"
   }
 
   /** maintenance mode start */
   def hostMaintenanceOn()(implicit info: ConnectInfo): String = {
-    s"${vhBase(info)} --operation enter"
+    s"${VICFG_HOSTOPS.cmdAndOpt(info)} --operation enter"
   }
 
   /** maintenance mode end */
   def hostMaintenanceOff()(implicit info: ConnectInfo): String = {
-    s"${vhBase(info)} --operation exit"
+    s"${VICFG_HOSTOPS.cmdAndOpt(info)} --operation exit"
   }
 
   /** ESXi host reboot */
   def hostReboot()(implicit info: ConnectInfo): String = {
-    s"${vhBase(info)} --operation reboot"
+    s"${VICFG_HOSTOPS.cmdAndOpt(info)} --operation reboot"
   }
 
   /** ESXi host shutdown */
   def hostShutdown()(implicit info: ConnectInfo): String = {
-    s"${vhBase(info)} --operation shutdown"
+    s"${VICFG_HOSTOPS.cmdAndOpt(info)} --operation shutdown"
   }
 
   // vmware-cmd
 
   /** get guest os list */
   def guestList()(implicit info: ConnectInfo): String = {
-    s"${vcBase(info)} -l"
+    s"${VMWARE_CMD.cmdAndOpt(info)} -l"
   }
 
   /** guest os power status */
   def guestState(path: String)(implicit info: ConnectInfo): String = {
-    s"${vcBase(info)} $dq$path$dq getstate"
+    s"${VMWARE_CMD.cmdAndOpt(info)} $dq$path$dq getstate"
   }
 
   /** guest os power on */
   def guestPowerOn(path: String)(implicit info: ConnectInfo): String = {
-    s"${vcBase(info)} $dq$path$dq start"
+    s"${VMWARE_CMD.cmdAndOpt(info)} $dq$path$dq start"
   }
 
   /** guest os power off (require VMWare Tools installed) */
   def guestPowerOff(path: String)(implicit info: ConnectInfo): String = {
-    s"${vcBase(info)} $dq$path$dq stop soft"
+    s"${VMWARE_CMD.cmdAndOpt(info)} $dq$path$dq stop soft"
   }
 
   /** guest os power off hard */
   def guestPowerOffHard(path: String)(implicit info: ConnectInfo): String = {
-    s"${vcBase(info)} $dq$path$dq stop hard"
+    s"${VMWARE_CMD.cmdAndOpt(info)} $dq$path$dq stop hard"
   }
 
   /** register to inventory */
   @deprecated("untested", "0.0.0")
   def guestRegisterInventory(path: String)(implicit info: ConnectInfo): String = {
-    s"${vcBase(info)} -s register $dq$path$dq"
+    s"${VMWARE_CMD.cmdAndOpt(info)} -s register $dq$path$dq"
   }
 
   /** remove from inventory */
   @deprecated("untested", "0.0.0")
   def guestRemoveInventory(path: String)(implicit info: ConnectInfo): String = {
-    s"${vcBase(info)} -s unregister $dq$path$dq"
+    s"${VMWARE_CMD.cmdAndOpt(info)} -s unregister $dq$path$dq"
   }
 
   // vifs
