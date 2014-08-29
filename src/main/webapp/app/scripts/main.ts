@@ -24,6 +24,20 @@ module Model {
 	}
 }
 
+module Keys {
+	export class URL {
+		static hosts = "/mock/host.json"
+	}
+}
+
+class Net {
+	static connect(url:String) : String {
+		var handle = alert(json:String) {alert(json)}
+		$.getJSON(url, handle(json))
+		return ""
+	}
+}
+
 // initializer
 class Init {
 	static model:Model.Vmodel
@@ -41,6 +55,7 @@ class Init {
 			])
 
 		ko.applyBindings(Init.model);
+		Net.connect(Keys.URL.hosts);
 	}
 }
 
