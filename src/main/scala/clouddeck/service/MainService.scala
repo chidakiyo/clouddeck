@@ -21,6 +21,7 @@ class MyServiceActor extends Actor with MainService {
 trait MainService extends HttpService {
 
   val myRoute = {
+    // ESXi host list of all
     path("") {
       get {
         respondWithMediaType(`application/json`) {
@@ -31,6 +32,7 @@ trait MainService extends HttpService {
         }
       }
     } ~
+      // Guest list of all
       path("list" / """.+""".r) { id =>
         get {
           respondWithMediaType(`application/json`) {
@@ -49,6 +51,16 @@ trait MainService extends HttpService {
 
               val jsonAst = hosts.toJson
               jsonAst.prettyPrint
+            }
+          }
+        }
+      } ~
+      // Guest state
+      path("state" / """.+""".r) { id => // id : machine unique id
+        get {
+          respondWithMediaType(`application/json`) {
+            complete {
+              "TODO" // TODO
             }
           }
         }
