@@ -12,6 +12,7 @@ import DefaultJsonProtocol._
 import clouddeck.command.ConnectInfo
 import clouddeck.command.Commands
 import clouddeck.parser.Parser
+import clouddeck.util.ConfigUtil
 
 class MyServiceActor extends Actor with MainService {
   def actorRefFactory = context
@@ -35,20 +36,18 @@ trait MainService extends HttpService {
         get {
           respondWithMediaType(`application/json`) {
             complete {
+              ConfigUtil.connectInfos().find(_.host == id) match {
+                case Some(info) =>
+                  val cmd = Commands.VMWARE_CMD.cmdAndOpt(info) + " -l"
+                  println(cmd)
 
-              // TODO Sample
-              val user = scala.util.Properties.envOrElse("CCC_USER", "")
-              val pass = scala.util.Properties.envOrElse("CCC_PASS", "")
+                  import scala.sys.process._
+                  val hosts = Parser.images(cmd.!!)
 
-              val info = ConnectInfo(id, user, pass)
-              val cmd = Commands.VMWARE_CMD.cmdAndOpt(info) + " -l"
-              println(cmd)
-
-              import scala.sys.process._
-              val hosts = Parser.images(cmd.!!)
-
-              val jsonAst = hosts.toJson
-              jsonAst.prettyPrint
+                  val jsonAst = hosts.toJson
+                  jsonAst.prettyPrint
+                case None => s"requested host not found. ${id}"
+              }
             }
           }
         }
