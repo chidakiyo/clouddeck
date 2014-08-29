@@ -47,7 +47,7 @@
 			   </thead>
                     <tbody data-bind="foreach : esxhosts">
                     <tr>
-                    <td><a data-bind="text : name"></a></td>
+                    <td><a data-bind="text : name, click : getChildren"></a></td>
                     </tr>
                     </tbody>
                     </table>
@@ -88,6 +88,7 @@
         <!-- bower:js -->
         <script src="bower_components/jquery/dist/jquery.js"></script>
         <script src="bower_components/knockoutjs/dist/knockout.js"></script>
+        <script src="bower_components/underscore/underscore.js"></script>
         <!-- endbower -->
         <!-- endbuild -->
 

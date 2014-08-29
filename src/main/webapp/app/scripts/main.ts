@@ -1,19 +1,26 @@
+/// <reference path="d/jquery.d.ts" />
 /// <reference path="d/knockout.d.ts" />
+/// <reference path="d/underscore.d.ts" />
 
 module Model {
 	export class EHost {
-		constructor(name:String){
+		constructor(name:string){
 			this.name(name)
 		}
 		name = ko.observable()
+		getChildren(){
+			Net.guest(Keys.URL.guests + this.name());
+		}
 	}
 	export class CHost {
-		constructor(name:String, power:boolean){
+		constructor(name:string, power:boolean, full:string){
 			this.name(name)
 			this.power(power)
+			this.full(full)
 		}
 		name = ko.observable()
 		power = ko.observable()
+		full = ko.observable()
 	}
 
 	export class Vmodel {
@@ -27,14 +34,26 @@ module Model {
 module Keys {
 	export class URL {
 		static hosts = "/mock/host.json"
+		static guests = "/mock/guest_"
 	}
 }
 
 class Net {
-	static connect(url:String) : String {
-		var handle = alert(json:String) {alert(json)}
-		$.getJSON(url, handle(json))
-		return ""
+	static connect(url:string) {
+		$.getJSON(url, function(data:any){
+			Init.model.esxhosts.destroyAll();
+			_(data).each(function(host){
+				Init.model.esxhosts.push(new Model.EHost(host.name))
+			})
+		})
+	}
+	static guest(url:string){
+		$.getJSON(url, function(data:any){
+			Init.model.clienthosts.destroyAll();
+			_(data).each(function(host){
+				Init.model.clienthosts.push(new Model.CHost(host.name, host.power, host.full))
+			})
+		})
 	}
 }
 
@@ -43,16 +62,6 @@ class Init {
 	static model:Model.Vmodel
 	constructor(){
 		Init.model = new Model.Vmodel();
-		Init.model.esxhosts = ko.observableArray([
-			new Model.EHost("192.168.1.1"),
-			new Model.EHost("192.168.1.2")
-			])
-
-		Init.model.svname("192.168.1.1")
-		Init.model.clienthosts = ko.observableArray([
-			new Model.CHost("hoge", false),
-			new Model.CHost("foo", true)
-			])
 
 		ko.applyBindings(Init.model);
 		Net.connect(Keys.URL.hosts);
