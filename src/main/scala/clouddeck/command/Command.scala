@@ -11,7 +11,9 @@ class Command(cmd: String) {
 
   def cmdStr() = {
     isWindows match {
+      // windows
       case true => s"cmd.exe /c ${cmd}.pl"
+      // other os (Linux/MacOS)
       case false => cmd
     }
   }
