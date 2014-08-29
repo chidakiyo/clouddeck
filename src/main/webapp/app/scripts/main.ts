@@ -28,6 +28,9 @@ module Model {
 
 		svname = ko.observable()
 		clienthosts = ko.observableArray()
+		clear(){
+			Init.model.clienthosts.removeAll()
+		}
 	}
 }
 
@@ -41,7 +44,7 @@ module Keys {
 class Net {
 	static connect(url:string) {
 		$.getJSON(url, function(data:any){
-			Init.model.esxhosts.destroyAll();
+			Init.model.esxhosts.removeAll();
 			_(data).each(function(host){
 				Init.model.esxhosts.push(new Model.EHost(host.name))
 			})
@@ -49,7 +52,7 @@ class Net {
 	}
 	static guest(url:string){
 		$.getJSON(url, function(data:any){
-			Init.model.clienthosts.destroyAll();
+			Init.model.clienthosts.removeAll();
 			_(data).each(function(host){
 				Init.model.clienthosts.push(new Model.CHost(host.name, host.power, host.full))
 			})
