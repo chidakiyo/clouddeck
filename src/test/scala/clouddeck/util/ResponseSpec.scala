@@ -16,6 +16,18 @@ class ResponseSpec extends Specification {
       vmx.storage mustEqual "abcdef-ghijkl-mnop-0123456789"
     }
 
+    "isOn return true when ON" in {
+      val line = "getstate() = on"
+      val status = Response.isOn(line)
+      status must beTrue
+    }
+
+    "isOn return true when OFF" in {
+      val line = "getstate() = off"
+      val status = Response.isOn(line)
+      status must beFalse
+    }
+
   }
 
 }
