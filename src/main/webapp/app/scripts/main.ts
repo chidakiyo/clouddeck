@@ -9,6 +9,7 @@ module Model {
 		}
 		name = ko.observable()
 		getChildren(){
+			Init.model.svname(this.name())
 			Net.guest(Keys.URL.guests + this.name());
 		}
 	}
