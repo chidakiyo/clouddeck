@@ -63,6 +63,10 @@ trait MainService extends HttpService {
             }
           }
         }
+      } ~
+      // Static contents
+      path("static" / """.+""".r) { filename =>
+        getFromFile("src/main/webapp/index.html") // TODO WARN : Consider security
       }
   }
 }
