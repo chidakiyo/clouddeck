@@ -11,3 +11,4 @@ test-output/
 .history
 .project
 .settings/
+src/main/webapp/app/scripts/*.js
