@@ -79,8 +79,14 @@
                     <tr>
                     <td><span data-bind="text : name"></span></td>
                     <td>
-                    <i class="glyphicon glyphicon-ok-sign" style="color:green; font-size: 12pt;" data-bind="visible : power() == true" ></i>
-                    <i class="glyphicon glyphicon-minus-sign" style="color:red; font-size: 12pt;" data-bind="visible : power() == false" ></i>
+                    <span class="label label-success" data-bind="visible : power() == true" style="display: inline-block; width: 50px;">
+                    <i class="glyphicon glyphicon-ok-sign" style="color:white; font-size: 9pt;"></i>
+                    &nbsp;ON
+                    </span>
+                    <span class="label label-danger"  data-bind="visible : power() == false" style="display: inline-block; width: 50px;">
+                    <i class="glyphicon glyphicon-minus-sign" style="color:white; font-size: 9pt;"></i>
+                    &nbsp;OFF
+                    </span>
                     </td>
                     </tr>
                     </tbody>
