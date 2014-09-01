@@ -10,7 +10,7 @@ module Model {
 		name = ko.observable()
 		getChildren(){
 			Init.model.svname(this.name())
-			Net.guest(Keys.URL.guests + this.name());
+			Net.guest(Keys.URL.url().guests + this.name());
 		}
 	}
 	export class CHost {
@@ -37,8 +37,34 @@ module Model {
 
 module Keys {
 	export class URL {
-		static hosts = "/mock/host.json"
-		static guests = "/mock/guest_"
+
+		private static urlmaster:any = null
+
+		static url():any{
+			if(URL.urlmaster == null){
+				if(Init.LIVE == true){
+					URL.urlmaster = URL.prod
+					return URL.urlmaster
+				} else {
+					URL.urlmaster = URL.test
+					return URL.urlmaster
+				}
+			} else {
+				return URL.urlmaster
+			}
+		}
+
+		private static prod = {
+			hosts : "allhost",
+			guests : "list/",
+			guests : "state"
+		}
+
+		private static test = {
+			hosts : "/mock/host.json",
+			guests : "/mock/guest_",
+			state : "/mock/state"
+		}
 	}
 }
 
@@ -63,12 +89,13 @@ class Net {
 
 // initializer
 class Init {
+	static LIVE:boolean = false
+	static DEBUG:boolean = false
 	static model:Model.Vmodel
 	constructor(){
 		Init.model = new Model.Vmodel();
-
 		ko.applyBindings(Init.model);
-		Net.connect(Keys.URL.hosts);
+		Net.connect(Keys.URL.url().hosts);
 	}
 }
 
