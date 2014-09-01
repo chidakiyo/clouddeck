@@ -16,4 +16,9 @@ object Keys {
     val basicOption = (info: ConnectInfo) => s"${host(info.host)}${user(info.user)}${pass(info.pass)}"
   }
 
+  object Const {
+    val dq = """""""
+    val quot = (word: String) => s"$dq$word$dq"
+  }
+
 }
