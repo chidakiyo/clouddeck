@@ -23,7 +23,6 @@ object Expression {
     ConfigUtil.connectInfos().find(_.host == id) match {
       case Some(info) =>
         val cmd = VMCommandBuilder.guestList()(info)
-        println(cmd)
 
         import scala.sys.process._
         val guests = Parser.images(cmd.!!)
@@ -41,7 +40,6 @@ object Expression {
       case Some(info) =>
 
         val cmd = VMCommandBuilder.guestList()(info)
-        println(cmd)
 
         import scala.sys.process._
         val guests = Parser.images(cmd.!!)
@@ -49,7 +47,6 @@ object Expression {
         guests.find(_.name == guestId) match {
           case Some(v) =>
             val cmd = VMCommandBuilder.guestState(v.fullPath)(info)
-            println(cmd)
             import scala.sys.process._
             val result = Response.isOn(cmd.!!)
             val vmx = VMX(v.name, v.image, v.storage, v.fullPath, Some(result))
