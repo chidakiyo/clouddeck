@@ -13,7 +13,7 @@ class ResponseSpec extends Specification {
       vmx.fullPath mustEqual line
       vmx.name mustEqual "VMX TEST"
       vmx.image mustEqual "BASE VMX.vmx"
-      vmx.storage mustEqual "abcdef-ghijkl-mnop-0123456789"
+      vmx.storage mustEqual "/vmfs/volumes/abcdef-ghijkl-mnop-0123456789"
     }
 
     "isOn return true when ON" in {
