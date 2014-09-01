@@ -10,7 +10,7 @@ module Model {
 		name = ko.observable()
 		getChildren(){
 			Init.model.svname(this.name())
-			Net.guest(Keys.URL.url().guests + this.name());
+			Net.guest(Keys.URL.url().guests + "/" + this.name());
 		}
 	}
 	export class CHost {
@@ -55,9 +55,9 @@ module Keys {
 		}
 
 		private static prod = {
-			hosts : "allhost",
-			guests : "list/",
-			guests : "state"
+			hosts : "hosts",
+			guests : "guests",
+			state : "state"
 		}
 
 		private static test = {
@@ -72,7 +72,7 @@ class Net {
 	static connect(url:string) {
 		$.getJSON(url, function(data:any){
 			Init.model.esxhosts.removeAll();
-			_(data).each(function(host){
+			_(data.success.data).each(function(host){
 				Init.model.esxhosts.push(new Model.EHost(host.name))
 			})
 		})
@@ -80,7 +80,7 @@ class Net {
 	static guest(url:string){
 		$.getJSON(url, function(data:any){
 			Init.model.clienthosts.removeAll();
-			_(data).each(function(host){
+			_(data.success.data).each(function(host){
 				Init.model.clienthosts.push(new Model.CHost(host.name, host.power, host.full))
 			})
 		})
@@ -89,7 +89,7 @@ class Net {
 
 // initializer
 class Init {
-	static LIVE:boolean = false
+	static LIVE:boolean = true
 	static DEBUG:boolean = false
 	static model:Model.Vmodel
 	constructor(){

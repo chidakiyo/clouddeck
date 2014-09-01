@@ -14,6 +14,7 @@ import clouddeck.command.Commands
 import clouddeck.parser.Parser
 import clouddeck.util.ConfigUtil
 import clouddeck.util.Expression._
+import java.io.File
 
 class MyServiceActor extends Actor with MainService {
   def actorRefFactory = context
@@ -24,7 +25,7 @@ trait MainService extends HttpService {
 
   val myRoute = {
     // ESXi host list of all
-    path("") {
+    path("hosts") {
       get {
         respondWithMediaType(`application/json`) {
           complete {
@@ -34,7 +35,7 @@ trait MainService extends HttpService {
       }
     } ~
       // Guest list of all
-      path("list" / """.+""".r) { id =>
+      path("guests" / """.+""".r) { id =>
         get {
           respondWithMediaType(`application/json`) {
             complete {
@@ -54,8 +55,19 @@ trait MainService extends HttpService {
         }
       } ~
       // Static contents
-      path("static" / """.+""".r) { filename =>
-        getFromFile("src/main/webapp/index.html") // TODO WARN : Consider security
+      pathPrefix("scripts") {
+        getFromBrowseableDirectory("./src/main/webapp/dist/scripts")
+      } ~
+      pathPrefix("bower_components") {
+        getFromBrowseableDirectory("./src/main/webapp/dist/bower_components")
+      } ~
+      pathPrefix("styles") {
+        getFromBrowseableDirectory("./src/main/webapp/dist/styles")
+      } ~
+      path("") {
+        println("index.html")
+        getFromFile(new File("./src/main/webapp/dist/index.html"))
       }
+
   }
 }
