@@ -1,0 +1,11 @@
+{
+  "name": "webapp",
+  "private": true,
+  "dependencies": {
+    "bootstrap-sass-official": "~3.1.0",
+    "jquery": "~1.11.0",
+    "knockoutjs": "~3.2.0",
+    "underscore": "~1.7.0"
+  },
+  "devDependencies": {}
+}

@@ -1,12 +1,29 @@
 package clouddeck.command
 
-import scala.sys.process._
+import clouddeck.util.OSUtil
+import clouddeck.Keys.Option._
 
 /**
- * Execute external command
+ *
  */
-object Command {
+class Command(cmd: String) {
+  val isWindows = OSUtil.isWindows()
 
-  val doCommand = (com: String) => com.!!
+  def cmdStr() = {
+    isWindows match {
+      // windows
+      case true => s"cmd.exe /c ${cmd}.pl"
+      // other os (Linux/MacOS)
+      case false => cmd
+    }
+  }
 
+  def cmdAndOpt(info: ConnectInfo): String = {
+    this.cmdStr + basicOption(info)
+  }
 }
+
+object Command {
+  def apply(cmd: String): Command = new Command(cmd)
+}
+
