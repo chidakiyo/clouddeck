@@ -4,13 +4,12 @@ import clouddeck.command.ConnectInfo
 import spray.json._
 import DefaultJsonProtocol._
 
-case class Result(success: Option[Success] = None, error: Option[Error] = None)
-case class Success(data: List[ConnectInfo])
+case class Result[A](success: Option[Success[A]] = None, error: Option[Error] = None)
+case class Success[A](data: List[A])
 case class Error(message: String, code: String)
 
 object ResultJsonProtocol extends DefaultJsonProtocol {
-  import MyJsonProtocol._
-  implicit val successFormat = jsonFormat1(Success)
+  implicit def successFormat[A: JsonFormat] = jsonFormat1(Success.apply[A])
   implicit val errorFormat = jsonFormat2(Error)
-  implicit val resultFormat = jsonFormat2(Result)
+  implicit def resultFormat[A: JsonFormat] = jsonFormat2(Result.apply[A])
 }
