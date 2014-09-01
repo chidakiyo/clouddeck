@@ -13,6 +13,7 @@ import clouddeck.command.ConnectInfo
 import clouddeck.command.Commands
 import clouddeck.parser.Parser
 import clouddeck.util.ConfigUtil
+import clouddeck.util.Expression._
 
 class MyServiceActor extends Actor with MainService {
   def actorRefFactory = context
@@ -27,8 +28,7 @@ trait MainService extends HttpService {
       get {
         respondWithMediaType(`application/json`) {
           complete {
-            val jsonAst = List(1, 2, 3).toJson
-            jsonAst.prettyPrint
+            hosts()
           }
         }
       }
@@ -38,28 +38,17 @@ trait MainService extends HttpService {
         get {
           respondWithMediaType(`application/json`) {
             complete {
-              ConfigUtil.connectInfos().find(_.host == id) match {
-                case Some(info) =>
-                  val cmd = Commands.VMWARE_CMD.cmdAndOpt(info) + " -l"
-                  println(cmd)
-
-                  import scala.sys.process._
-                  val hosts = Parser.images(cmd.!!)
-
-                  val jsonAst = hosts.toJson
-                  jsonAst.prettyPrint
-                case None => s"requested host not found. ${id}"
-              }
+              guests(id)
             }
           }
         }
       } ~
       // Guest state
-      path("state" / """.+""".r) { id => // id : machine unique id
+      path("state" / """.+""".r / """.+""".r) { (id, guestId) => // id : host name, guestId : guest name
         get {
           respondWithMediaType(`application/json`) {
             complete {
-              "TODO" // TODO
+              state(id, guestId)
             }
           }
         }

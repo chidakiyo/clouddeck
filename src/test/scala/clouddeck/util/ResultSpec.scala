@@ -10,24 +10,27 @@ class ResultSpec extends Specification {
   "Result" should {
 
     "success" in {
+      import HostJsonProtocol._
       import ResultJsonProtocol._
-      val r = Result(success = Some(Success(List(ConnectInfo("localhost", "admin", "pass")))))
+      val r = Result(success = Some(Success(List(Host("localhost")))))
       println(r.toJson)
-      r.toJson mustEqual """{"success":{"data":[{"host":"localhost","user":"admin","pass":"pass"}]}}""".parseJson
+      r.toJson mustEqual """{"success":{"data":[{"name":"localhost"}]}}""".parseJson
     }
 
     "error" in {
+      import HostJsonProtocol._
       import ResultJsonProtocol._
-      val r = Result(error = Some(Error("error!", "E001")))
+      val r = Result[Host](error = Some(Error("error!", "E001")))
       println(r.toJson)
       r.toJson mustEqual """{"error":{"message":"error!","code":"E001"}}""".parseJson
     }
 
     "success and error" in {
+      import HostJsonProtocol._
       import ResultJsonProtocol._
-      val r = Result(success = Some(Success(List(ConnectInfo("localhost", "admin", "pass")))), error = Some(Error("error!", "E001")))
+      val r = Result(success = Some(Success(List(Host("localhost")))), error = Some(Error("error!", "E001")))
       println(r.toJson)
-      r.toJson mustEqual """{"success":{"data":[{"host":"localhost","user":"admin","pass":"pass"}]}, "error":{"message":"error!","code":"E001"}}""".parseJson
+      r.toJson mustEqual """{"success":{"data":[{"name":"localhost"}]}, "error":{"message":"error!","code":"E001"}}""".parseJson
     }
 
   }

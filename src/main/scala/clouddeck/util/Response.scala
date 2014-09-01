@@ -1,8 +1,5 @@
 package clouddeck.util
 
-import spray.json._
-import DefaultJsonProtocol._
-
 object Response {
 
   def toVMX(line: String): VMX = {
@@ -11,18 +8,12 @@ object Response {
   }
 
   def isOn(line: String): Boolean = {
-    val columns = line.replaceAll("""\s+""", "").split("=")
-    columns(1) match {
+    val columns = line.split("=")
+    columns(1).trim match {
       case "on" => true
       case "off" => false
       case _ => throw new RuntimeException(s"response cannot be parsed as status. ${line}")
     }
   }
 
-}
-
-case class VMX(name: String, image: String, storage: String, fullPath: String)
-
-object VMXJsonProtocol extends DefaultJsonProtocol {
-  implicit val vmxFormat = jsonFormat4(VMX)
 }
