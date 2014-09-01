@@ -1,3 +1,5 @@
+import AssemblyKeys._
+
 organization  := "clouddeck"
 
 version       := "0.1"
@@ -21,8 +23,10 @@ libraryDependencies ++= {
   )
 }
 
-#jetty(port = 8686)
+assemblySettings
 
-tomcat(port = 8686)
+//jetty(port = 8686)
+
+//tomcat(port = 8686)
 
 Revolver.settings
