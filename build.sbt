@@ -21,4 +21,8 @@ libraryDependencies ++= {
   )
 }
 
+#jetty(port = 8686)
+
+tomcat(port = 8686)
+
 Revolver.settings
