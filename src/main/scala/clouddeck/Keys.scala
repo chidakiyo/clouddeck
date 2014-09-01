@@ -19,6 +19,7 @@ object Keys {
   object Const {
     val dq = """""""
     val quot = (word: String) => s"$dq$word$dq"
+    val contentroot = "./src/main/webapp/dist/"
   }
 
 }

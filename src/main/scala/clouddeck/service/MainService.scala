@@ -15,6 +15,7 @@ import clouddeck.parser.Parser
 import clouddeck.util.ConfigUtil
 import clouddeck.util.Expression._
 import java.io.File
+import clouddeck.Keys
 
 class MyServiceActor extends Actor with MainService {
   def actorRefFactory = context
@@ -56,17 +57,17 @@ trait MainService extends HttpService {
       } ~
       // Static contents
       pathPrefix("scripts") {
-        getFromBrowseableDirectory("./src/main/webapp/dist/scripts")
+        getFromBrowseableDirectory(s"${Keys.Const.contentroot}scripts")
       } ~
       pathPrefix("bower_components") {
-        getFromBrowseableDirectory("./src/main/webapp/dist/bower_components")
+        getFromBrowseableDirectory(s"${Keys.Const.contentroot}bower_components")
       } ~
       pathPrefix("styles") {
-        getFromBrowseableDirectory("./src/main/webapp/dist/styles")
+        getFromBrowseableDirectory(s"${Keys.Const.contentroot}styles")
       } ~
       path("") {
         println("index.html")
-        getFromFile(new File("./src/main/webapp/dist/index.html"))
+        getFromFile(new File(s"${Keys.Const.contentroot}index.html"))
       }
 
   }
