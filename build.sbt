@@ -19,7 +19,8 @@ libraryDependencies ++= {
     "com.typesafe.akka"   %%  "akka-actor"    % akkaV,
     "com.typesafe.akka"   %%  "akka-testkit"  % akkaV   % "test",
     "org.specs2"          %%  "specs2-core"   % "2.3.7" % "test",
-    "commons-io"          %   "commons-io"    % "2.4"
+    "commons-io"          %   "commons-io"    % "2.4",
+    "com.vmware" % "vijava" % "5.1"
   )
 }
 
