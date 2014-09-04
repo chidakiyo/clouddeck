@@ -1,9 +1,8 @@
 package clouddeck.util
 
-import clouddeck.command.ConnectInfo
-import clouddeck.command.Commands
-import clouddeck.parser.Parser
-import clouddeck.command.VMCommandBuilder
+import ResultJsonProtocol.resultFormat
+import clouddeck.command.VIJavaCommandBuilder
+import spray.json.pimpAny
 
 object Expression {
 
@@ -19,13 +18,9 @@ object Expression {
     import spray.json._
     import VMXJsonProtocol._
     import ResultJsonProtocol._
-
     ConfigUtil.connectInfos().find(_.host == id) match {
       case Some(info) =>
-        val cmd = VMCommandBuilder.guestList()(info)
-
-        import scala.sys.process._
-        val guests = Parser.images(cmd.!!)
+        val guests = VIJavaCommandBuilder.guestList()(info)
         Result[VMX](success = Some(Success(guests))).toJson.prettyPrint
       case None => Result[VMX](error = Some(Error(s"requested host not found. ${id}", "E001"))).toJson.prettyPrint
     }
@@ -35,25 +30,17 @@ object Expression {
     import spray.json._
     import VMXJsonProtocol._
     import ResultJsonProtocol._
-
     ConfigUtil.connectInfos().find(_.host == id) match {
       case Some(info) =>
-
-        val cmd = VMCommandBuilder.guestList()(info)
-
-        import scala.sys.process._
-        val guests = Parser.images(cmd.!!)
-
+        val guests = VIJavaCommandBuilder.guestList()(info)
         guests.find(_.name == guestId) match {
           case Some(v) =>
-            val cmd = VMCommandBuilder.guestState(v.fullPath)(info)
-            import scala.sys.process._
-            val result = Response.isOn(cmd.!!)
-            val vmx = VMX(v.name, v.image, v.storage, v.fullPath, Some(result))
-            Result[VMX](success = Some(Success(List(vmx)))).toJson.prettyPrint
+            VIJavaCommandBuilder.guestState(guestId)(info) match {
+              case Some(vmx) => Result[VMX](success = Some(Success(List(vmx)))).toJson.prettyPrint
+              case None => Result[VMX](error = Some(Error(s"requested guest not found. ${guestId}", "E001"))).toJson.prettyPrint
+            }
           case None => Result[VMX](error = Some(Error(s"requested guest not found. ${guestId}", "E001"))).toJson.prettyPrint
         }
-
       case None => Result[VMX](error = Some(Error(s"requested host not found. ${id}", "E001"))).toJson.prettyPrint
     }
   }
