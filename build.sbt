@@ -1,3 +1,5 @@
+import AssemblyKeys._
+
 organization  := "clouddeck"
 
 version       := "0.1"
@@ -21,5 +23,11 @@ libraryDependencies ++= {
     "com.vmware" % "vijava" % "5.1"
   )
 }
+
+assemblySettings
+
+//jetty(port = 8686)
+
+//tomcat(port = 8686)
 
 Revolver.settings
