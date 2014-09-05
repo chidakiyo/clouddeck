@@ -31,7 +31,7 @@ object VIJavaCommandBuilder {
     val vms = vmFolder.getChildEntity()
 
     val vmxs = vms.toList.filter(_.isInstanceOf[VirtualMachine]).map(_.asInstanceOf[VirtualMachine]).map { v =>
-      VMX(v.getName, "image", "storage", "fullPath", Some(v.getRuntime().asInstanceOf[VirtualMachineRuntimeInfo].getPowerState() == VirtualMachinePowerState.poweredOn))
+      VMX(v.getName, v.getConfig().getFiles().getVmPathName().split("/").last, v.getDatastores()(0).getInfo().getName(), v.getConfig().getFiles().getVmPathName(), Some(v.getRuntime().asInstanceOf[VirtualMachineRuntimeInfo].getPowerState() == VirtualMachinePowerState.poweredOn))
     }
     si.getServerConnection().logout()
     vmxs
