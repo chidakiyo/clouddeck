@@ -66,9 +66,7 @@ trait MainService extends HttpService {
         getFromBrowseableDirectory(s"${Keys.Const.contentroot}styles")
       } ~
       path("") {
-        println("index.html")
         getFromFile(new File(s"${Keys.Const.contentroot}index.html"))
       }
-
   }
 }
