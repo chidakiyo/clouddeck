@@ -32,15 +32,15 @@
                 </ul>
                 <h3 class="text-muted" style="display: inline-block; margin-right: 5px">Clouddeck</h3> <span>0.1.2</span>
             </div>
-            
+
             <div class="col-lg-12" style="height:50px;">
-            <button class="btn btn-info" data-bind="click : clear, visible : clienthosts().length > 0"><< Back</button>
+            <button class="btn btn-info" data-bind="click : clear, visible : clienthosts().length > 0">&lt;&lt; Back</button>
             </div>
 
 			<!-- panel a -->
             <div class="row marketing" data-bind="visible : clienthosts().length == 0">
                 <div class="col-lg-12">
-                
+
                 <div class="panel panel-info">
   				<div class="panel-heading">All ESXi Hosts</div>
 
@@ -57,14 +57,14 @@
                     </tbody>
                     </table>
 				</div>
-    
+
                 </div>
             </div>
-            
+
 			<!-- panel b -->
             <div class="row marketing" data-bind="visible : clienthosts().length > 0">
                 <div class="col-lg-12">
-                
+
                         <div class="panel panel-info">
   				<div class="panel-heading">All <span data-bind="text : svname"></span> Guests</div>
 
