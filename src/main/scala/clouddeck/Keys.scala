@@ -8,6 +8,8 @@ object Keys {
     val VmwareCmd = "vmware-cmd"
     val VixCmd = "vmrun"
     val VicfgHostops = "vicfg-hostops"
+    val Vifs = "vifs"
+    val Esxcli = "esxcli"
   }
 
   object Option {
