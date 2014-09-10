@@ -55,6 +55,26 @@ trait MainService extends HttpService {
           }
         }
       } ~
+      // Guest power on
+      path("start" / """.+""".r / """.+""".r) { (id, guestId) => // id : host name, guestId : guest name
+        get {
+          respondWithMediaType(`application/json`) {
+            complete {
+              start(id, guestId)
+            }
+          }
+        }
+      } ~
+      // Guest power off
+      path("stop" / """.+""".r / """.+""".r) { (id, guestId) => // id : host name, guestId : guest name
+        get {
+          respondWithMediaType(`application/json`) {
+            complete {
+              stop(id, guestId)
+            }
+          }
+        }
+      } ~
       // Static contents
       pathPrefix("scripts") {
         getFromBrowseableDirectory(s"${Keys.Const.contentroot}scripts")
