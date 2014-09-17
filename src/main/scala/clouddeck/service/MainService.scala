@@ -17,12 +17,14 @@ import clouddeck.util.Expression._
 import java.io.File
 import clouddeck.Keys
 
+import com.typesafe.scalalogging.slf4j._
+
 class MyServiceActor extends Actor with MainService {
   def actorRefFactory = context
   def receive = runRoute(myRoute)
 }
 
-trait MainService extends HttpService {
+trait MainService extends HttpService with Logging {
 
   val myRoute = {
     // ESXi host list of all
@@ -30,6 +32,7 @@ trait MainService extends HttpService {
       get {
         respondWithMediaType(`application/json`) {
           complete {
+            logger.info("hosts")
             hosts()
           }
         }
@@ -40,6 +43,7 @@ trait MainService extends HttpService {
         get {
           respondWithMediaType(`application/json`) {
             complete {
+              logger.info(s"guests/$id")
               guests(id)
             }
           }
