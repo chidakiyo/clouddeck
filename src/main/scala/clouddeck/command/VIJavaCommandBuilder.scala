@@ -7,6 +7,7 @@ import com.vmware.vim25.mo.Datacenter
 import com.vmware.vim25.mo.VirtualMachine
 import com.vmware.vim25.VirtualMachineRuntimeInfo
 import com.vmware.vim25.VirtualMachinePowerState
+import clouddeck.util.VMwareTools
 
 object VIJavaCommandBuilder {
 
@@ -31,7 +32,13 @@ object VIJavaCommandBuilder {
     val vms = vmFolder.getChildEntity()
 
     val vmxs = vms.toList.filter(_.isInstanceOf[VirtualMachine]).map(_.asInstanceOf[VirtualMachine]).map { v =>
-      VMX(v.getName, v.getConfig().getFiles().getVmPathName().split("/").last, v.getDatastores()(0).getInfo().getName(), v.getConfig().getFiles().getVmPathName(), Some(v.getRuntime().asInstanceOf[VirtualMachineRuntimeInfo].getPowerState() == VirtualMachinePowerState.poweredOn))
+      VMX(v.getName, //
+        v.getConfig().getFiles().getVmPathName().split("/").last, //
+        v.getDatastores()(0).getInfo().getName(), //
+        v.getConfig().getFiles().getVmPathName(), //
+        Some(v.getRuntime().asInstanceOf[VirtualMachineRuntimeInfo].getPowerState() == VirtualMachinePowerState.poweredOn), //
+        Some(VMwareTools(v.getGuest().getToolsStatus().name()).toString()) //
+        )
     }
     si.getServerConnection().logout()
     vmxs
