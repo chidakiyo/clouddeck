@@ -6,8 +6,10 @@ module Model {
 	export class EHost {
 		constructor(data:any){
 			this.name(data.name)
+			Net.guest(Keys.URL.url().guests + this.name(), this.child, Net.chost);
 		}
 		name = ko.observable()
+		child = ko.observableArray()
 		getChildren(){
 			Init.model.svname(this.name())
 			Net.guest(Keys.URL.url().guests + this.name(), Init.model.clienthosts, Net.chost);
