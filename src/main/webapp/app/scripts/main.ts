@@ -4,20 +4,21 @@
 
 module Model {
 	export class EHost {
-		constructor(name:string){
-			this.name(name)
+		constructor(data:any){
+			this.name(data.name)
 		}
 		name = ko.observable()
 		getChildren(){
 			Init.model.svname(this.name())
-			Net.guest(Keys.URL.url().guests + this.name());
+			Net.guest(Keys.URL.url().guests + this.name(), Init.model.clienthosts, Net.chost);
 		}
 	}
 	export class CHost {
-		constructor(name:string, power:boolean, full:string){
-			this.name(name)
-			this.power(power)
-			this.full(full)
+		constructor(data:any){
+//		constructor(name:string, power:boolean, full:string){
+			this.name(data.name)
+			this.power(data.isOn)
+			this.full(data.full)
 		}
 		name = ko.observable()
 		power = ko.observable()
@@ -69,23 +70,25 @@ module Keys {
 }
 
 class Net {
-	static connect(url:string) {
+	static host(url:string, list:KnockoutObservableArray<any>, create:any) {
 		$.getJSON(url, function(data:any){
-			Init.model.esxhosts.removeAll();
+			list.removeAll();
 			_(data.success.data).each(function(host){
-				Init.model.esxhosts.push(new Model.EHost(host.name))
+				list.push(create(host))
 			})
 		})
 	}
-	static guest(url:string){
+	static guest(url:string, list:KnockoutObservableArray<any>, create:any){
 		$.getJSON(url, function(data:any){
-			console.log(data)
-			Init.model.clienthosts.removeAll();
+			list.removeAll();
 			_(data.success.data).each(function(host){
-				Init.model.clienthosts.push(new Model.CHost(host.name, host.isOn, host.full))
+				list.push(create(host))
 			})
 		})
 	}
+
+	static ehost = (host:any) => new Model.EHost(host)
+	static chost = (host:any) => new Model.CHost(host)
 }
 
 // initializer
@@ -96,9 +99,8 @@ class Init {
 	constructor(){
 		Init.model = new Model.Vmodel();
 		ko.applyBindings(Init.model);
-		Net.connect(Keys.URL.url().hosts);
+		Net.host(Keys.URL.url().hosts, Init.model.esxhosts, Net.ehost);
 	}
 }
-
 
 $(() => new Init());

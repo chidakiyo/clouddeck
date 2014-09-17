@@ -21,6 +21,10 @@ class Command(cmd: String) {
   def cmdAndOpt(info: ConnectInfo): String = {
     this.cmdStr + basicOption(info)
   }
+
+  def cmdAndOpt_vix(info: ConnectInfo): String = {
+    s"cmd.exe /c ${cmd}.exe" + basicOptionVIX(info)
+  }
 }
 
 object Command {

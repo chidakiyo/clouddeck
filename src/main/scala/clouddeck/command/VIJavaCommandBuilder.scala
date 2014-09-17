@@ -7,6 +7,7 @@ import com.vmware.vim25.mo.Datacenter
 import com.vmware.vim25.mo.VirtualMachine
 import com.vmware.vim25.VirtualMachineRuntimeInfo
 import com.vmware.vim25.VirtualMachinePowerState
+import clouddeck.util.VMwareTools
 
 object VIJavaCommandBuilder {
 
@@ -43,7 +44,8 @@ object VIJavaCommandBuilder {
         Some(v.getGuest().getHostName() match {
           case null => "unknown"
           case s => s
-        }) //
+        }), //
+        Some(VMwareTools(v.getGuest().getToolsStatus().name()).toString()) //
         )
     }
     si.getServerConnection().logout()
