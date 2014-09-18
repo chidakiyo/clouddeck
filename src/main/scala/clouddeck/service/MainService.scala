@@ -54,6 +54,7 @@ trait MainService extends HttpService with Logging {
         get {
           respondWithMediaType(`application/json`) {
             complete {
+              logger.info(s"api/state/$id/$guestId")
               state(id, guestId)
             }
           }
@@ -64,6 +65,7 @@ trait MainService extends HttpService with Logging {
         get {
           respondWithMediaType(`application/json`) {
             complete {
+              logger.info(s"api/start/$id/$guestId")
               start(id, guestId)
             }
           }
@@ -74,6 +76,7 @@ trait MainService extends HttpService with Logging {
         get {
           respondWithMediaType(`application/json`) {
             complete {
+              logger.info(s"api/stop/$id/$guestId")
               stop(id, guestId)
             }
           }
