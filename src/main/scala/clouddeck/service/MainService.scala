@@ -28,7 +28,7 @@ trait MainService extends HttpService with Logging {
 
   val myRoute = {
     // ESXi host list of all
-    path("hosts") {
+    path("api" / "hosts") {
       get {
         respondWithMediaType(`application/json`) {
           complete {
@@ -39,7 +39,7 @@ trait MainService extends HttpService with Logging {
       }
     } ~
       // Guest list of all
-      path("guests" / """.+""".r) { id =>
+      path("api" / "guests" / """.+""".r) { id =>
         get {
           respondWithMediaType(`application/json`) {
             complete {
@@ -50,7 +50,7 @@ trait MainService extends HttpService with Logging {
         }
       } ~
       // Guest state
-      path("state" / """.+""".r / """.+""".r) { (id, guestId) => // id : host name, guestId : guest name
+      path("api" / "state" / """.+""".r / """.+""".r) { (id, guestId) => // id : host name, guestId : guest name
         get {
           respondWithMediaType(`application/json`) {
             complete {
@@ -60,7 +60,7 @@ trait MainService extends HttpService with Logging {
         }
       } ~
       // Guest power on
-      path("start" / """.+""".r / """.+""".r) { (id, guestId) => // id : host name, guestId : guest name
+      path("api" / "start" / """.+""".r / """.+""".r) { (id, guestId) => // id : host name, guestId : guest name
         get {
           respondWithMediaType(`application/json`) {
             complete {
@@ -70,7 +70,7 @@ trait MainService extends HttpService with Logging {
         }
       } ~
       // Guest power off
-      path("stop" / """.+""".r / """.+""".r) { (id, guestId) => // id : host name, guestId : guest name
+      path("api" / "stop" / """.+""".r / """.+""".r) { (id, guestId) => // id : host name, guestId : guest name
         get {
           respondWithMediaType(`application/json`) {
             complete {

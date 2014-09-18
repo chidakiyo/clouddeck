@@ -6,13 +6,13 @@ module Model {
 	export class EHost {
 		constructor(data:any){
 			this.name(data.name)
-			Net.guest(Keys.URL.url().guests + this.name(), this.child, Net.chost);
+			Net.guest(Keys.URL.guests + this.name(), this.child, Net.chost);
 		}
 		name = ko.observable()
 		child = ko.observableArray()
 		getChildren(){
 			Init.model.svname(this.name())
-			Net.guest(Keys.URL.url().guests + this.name(), Init.model.clienthosts, Net.chost);
+			Net.guest(Keys.URL.guests + this.name(), Init.model.clienthosts, Net.chost);
 		}
 	}
 	export class CHost {
@@ -40,34 +40,9 @@ module Model {
 
 module Keys {
 	export class URL {
-
-		private static urlmaster:any = null
-
-		static url():any{
-			if(URL.urlmaster == null){
-				if(Init.LIVE == true){
-					URL.urlmaster = URL.prod
-					return URL.urlmaster
-				} else {
-					URL.urlmaster = URL.test
-					return URL.urlmaster
-				}
-			} else {
-				return URL.urlmaster
-			}
-		}
-
-		private static prod = {
-			hosts : "hosts",
-			guests : "guests/",
-			state : "state"
-		}
-
-		private static test = {
-			hosts : "/mock/host.json",
-			guests : "/mock/guest_",
-			state : "/mock/state"
-		}
+		static hosts  = "/api/hosts"
+		static guests = "/api/guests/"
+		static state  = "/api/state"
 	}
 }
 
@@ -95,13 +70,12 @@ class Net {
 
 // initializer
 class Init {
-	static LIVE:boolean = false
 	static DEBUG:boolean = false
 	static model:Model.Vmodel
 	constructor(){
 		Init.model = new Model.Vmodel();
 		ko.applyBindings(Init.model);
-		Net.host(Keys.URL.url().hosts, Init.model.esxhosts, Net.ehost);
+		Net.host(Keys.URL.hosts, Init.model.esxhosts, Net.ehost);
 	}
 }
 
