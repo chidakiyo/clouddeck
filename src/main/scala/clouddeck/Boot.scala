@@ -15,8 +15,12 @@ object Boot extends App {
   implicit val system = ActorSystem("on-spray-can")
   val service = system.actorOf(Props[MyServiceActor], "clouddeck-service")
   implicit val timeout = Timeout(100.seconds)
-  IO(Http) ? Http.Bind(service, interface = "0.0.0.0", port = 8686)
+  IO(Http) ? Http.Bind(service, interface = "0.0.0.0", port = AppConfig.PORT)
 
   List(new File(_root_.util.Directory.AppHome)).filter(!_.exists).foreach(_.mkdirs)
   List(_root_.util.Directory.AppConf).filter(!_.exists).foreach(ConfigUtil.init(_))
+}
+
+object AppConfig {
+  val PORT = 8686
 }
