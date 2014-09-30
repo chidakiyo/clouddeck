@@ -25,8 +25,7 @@ module Model {
 		power = ko.observable()
 		full = ko.observable()
 		searchChildren(){
-			console.log(Init.model.searchfor())
-			return -1 !== new String(this.name()).indexOf("A");
+			return -1 !== new String(this.name()).toUpperCase().indexOf(Init.model.searchfor().toUpperCase());
 		}
 	}
 
@@ -34,7 +33,7 @@ module Model {
 		esxhosts = ko.observableArray()
 		svname = ko.observable()
 		clienthosts = ko.observableArray()
-		searchfor = ko.observable()
+		searchfor = ko.observable("")
 		clear(){
 			Init.model.clienthosts.removeAll()
 		}
