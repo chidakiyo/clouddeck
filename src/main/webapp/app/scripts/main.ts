@@ -13,6 +13,7 @@ module Model {
 		getChildren(){
 			Init.model.svname(this.name())
 			Net.guest(this.name(), Init.model.clienthosts)
+			Init.model.searchfor("")
 		}
 	}
 	export class CHost {
