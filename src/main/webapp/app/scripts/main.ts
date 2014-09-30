@@ -37,6 +37,7 @@ module Model {
 		searchfor = ko.observable("")
 		clear(){
 			Init.model.clienthosts.removeAll()
+			Init.model.searchfor("")
 		}
 	}
 }
@@ -68,17 +69,12 @@ class Net {
 // initializer
 class Init {
 	static DEBUG:boolean = false
-	static model:Model.Vmodel
-	// query = ko.observable('')
+	static model = new Model.Vmodel()
 	constructor(){
-		Init.model = new Model.Vmodel()
+		$.ajaxSetup({ cache: false }); // disable cache
 		ko.applyBindings(Init.model)
 		Net.host(Init.model.esxhosts)
-//		Net.host(Keys.URL.hosts, Init.model.esxhosts, Net.ehost);
-//		Init.query.subscribe(Init.search);
-		
 	}
-
 }
 
 $(() => new Init())

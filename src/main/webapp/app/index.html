@@ -55,21 +55,31 @@
 			   <th colspan="2"><a data-bind="text : name, click : getChildren"></a></th>
 			   </tr>
 			   </thead>
-                    <tbody data-bind="foreach : child">
+                    <tbody data-bind="visible : $data.child().length > 0, foreach : $data.child">
                     <tr data-bind="visible : searchChildren() == true">
                     <td>
                       <span data-bind="text : name"></span>
                     </td>
                     <td>
+                      <!-- power-on icon -->
                       <span class="label label-success" data-bind="visible : power() == true" style="display: inline-block; width: 50px;">
                         <i class="glyphicon glyphicon-ok-sign" style="color:white; font-size: 9pt;"></i>&nbsp;ON
                       </span>
+                      <!-- power-off icon -->
                       <span class="label label-danger" data-bind="visible : power() == false" style="display: inline-block; width: 50px;">
                         <i class="glyphicon glyphicon-minus-sign" style="color:white; font-size: 9pt;"></i>&nbsp;OFF
                       </span>
                     </td>
                     </tr>
                     </tbody>
+                    <tbody data-bind="visible : ($data.child().length > 0) == false">
+                    <tr>
+                    <td>
+                       <img src="images/ajax-loader.gif" alt="loading" style="margin-left: 20px;" />
+                       </td>
+                       </tr>
+                    </tbody>
+                    
                     </table>
 				</div>
 
