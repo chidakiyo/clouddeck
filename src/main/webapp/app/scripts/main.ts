@@ -24,13 +24,17 @@ module Model {
 		name = ko.observable()
 		power = ko.observable()
 		full = ko.observable()
+		searchChildren(){
+			console.log(Init.model.searchfor())
+			return -1 !== new String(this.name()).indexOf("A");
+		}
 	}
 
 	export class Vmodel {
 		esxhosts = ko.observableArray()
-
 		svname = ko.observable()
 		clienthosts = ko.observableArray()
+		searchfor = ko.observable()
 		clear(){
 			Init.model.clienthosts.removeAll()
 		}
@@ -65,11 +69,16 @@ class Net {
 class Init {
 	static DEBUG:boolean = false
 	static model:Model.Vmodel
+	// query = ko.observable('')
 	constructor(){
 		Init.model = new Model.Vmodel()
 		ko.applyBindings(Init.model)
 		Net.host(Init.model.esxhosts)
+//		Net.host(Keys.URL.hosts, Init.model.esxhosts, Net.ehost);
+//		Init.query.subscribe(Init.search);
+		
 	}
+
 }
 
 $(() => new Init())
