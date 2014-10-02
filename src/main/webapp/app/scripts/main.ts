@@ -13,6 +13,7 @@ module Model {
 		getChildren(){
 			Init.model.svname(this.name())
 			Net.guest(this.name(), Init.model.clienthosts)
+			Init.model.searchfor("")
 		}
 	}
 	export class CHost {
@@ -24,15 +25,19 @@ module Model {
 		name = ko.observable()
 		power = ko.observable()
 		full = ko.observable()
+		searchChildren(){
+			return -1 !== new String(this.name()).toUpperCase().indexOf(Init.model.searchfor().toUpperCase());
+		}
 	}
 
 	export class Vmodel {
 		esxhosts = ko.observableArray()
-
 		svname = ko.observable()
 		clienthosts = ko.observableArray()
+		searchfor = ko.observable("")
 		clear(){
 			Init.model.clienthosts.removeAll()
+			Init.model.searchfor("")
 		}
 	}
 }

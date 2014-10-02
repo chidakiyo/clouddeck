@@ -35,6 +35,11 @@
 
             <div class="col-lg-12" style="height:50px;">
             <button class="btn btn-info" data-bind="click : clear, visible : clienthosts().length > 0">&lt;&lt; Back</button>
+            <div class="form-inline pull-right"><div class="form-group">
+                <label class="control-label" for="searchhost">search target&nbsp;:&nbsp;</label>
+                <input class="form-control" id="searchhost" placeholder="host name" type="search" data-bind="value : searchfor, valueUpdate : 'afterkeydown'" />
+            </div></div>
+            
             </div>
 
 			<!-- panel a -->
@@ -50,9 +55,8 @@
 			   <th colspan="2"><a data-bind="text : name, click : getChildren"></a></th>
 			   </tr>
 			   </thead>
-
                     <tbody data-bind="visible : $data.child().length > 0, foreach : $data.child">
-                    <tr>
+                    <tr data-bind="visible : searchChildren() == true">
                     <td>
                       <span data-bind="text : name"></span>
                     </td>
@@ -97,7 +101,7 @@
 			   </tr>
 			   </thead>
                     <tbody data-bind="foreach : clienthosts">
-                    <tr>
+                    <tr data-bind="visible : searchChildren() == true">
                     <td><span data-bind="text : name"></span></td>
                     <td>
                     <span class="label label-success" data-bind="visible : power() == true" style="display: inline-block; width: 50px;">
