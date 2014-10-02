@@ -92,6 +92,9 @@ trait MainService extends HttpService with Logging {
       pathPrefix("styles") {
         getFromBrowseableDirectory(s"${Keys.Const.contentroot}styles")
       } ~
+      pathPrefix("images") {
+        getFromBrowseableDirectory(s"${Keys.Const.contentroot}images")
+      } ~
       path("") {
         getFromFile(new File(s"${Keys.Const.contentroot}index.html"))
       }

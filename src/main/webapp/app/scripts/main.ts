@@ -64,9 +64,9 @@ class Net {
 // initializer
 class Init {
 	static DEBUG:boolean = false
-	static model:Model.Vmodel
+	static model = new Model.Vmodel()
 	constructor(){
-		Init.model = new Model.Vmodel()
+		$.ajaxSetup({ cache: false }); // disable cache
 		ko.applyBindings(Init.model)
 		Net.host(Init.model.esxhosts)
 	}
