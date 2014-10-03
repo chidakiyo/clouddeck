@@ -8,7 +8,6 @@ import com.vmware.vim25.mo.VirtualMachine
 import com.vmware.vim25.VirtualMachineRuntimeInfo
 import com.vmware.vim25.VirtualMachinePowerState
 import clouddeck.util.VMwareTools
-import clouddeck.util.Host
 import com.vmware.vim25.mo.InventoryNavigator
 import com.vmware.vim25.mo.HostSystem
 import clouddeck.util.Host
