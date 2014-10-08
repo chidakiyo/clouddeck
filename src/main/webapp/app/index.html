@@ -60,14 +60,27 @@
                     <td>
                       <span data-bind="text : name"></span>
                     </td>
-                    <td>
+                    <td>power&nbsp;:&nbsp;
                       <!-- power-on icon -->
                       <span class="label label-success" data-bind="visible : power() == true" style="display: inline-block; width: 50px;">
-                        <i class="glyphicon glyphicon-ok-sign" style="color:white; font-size: 9pt;"></i>&nbsp;ON
+                        <i class="glyphicon glyphicon-ok-sign" style="color:white; font-size: 9pt;"></i>&nbsp;&nbsp;ON
                       </span>
                       <!-- power-off icon -->
                       <span class="label label-danger" data-bind="visible : power() == false" style="display: inline-block; width: 50px;">
-                        <i class="glyphicon glyphicon-minus-sign" style="color:white; font-size: 9pt;"></i>&nbsp;OFF
+                        <i class="glyphicon glyphicon-minus-sign" style="color:white; font-size: 9pt;"></i>&nbsp;&nbsp;OFF
+                      </span>
+                      <br />tools&nbsp;:&nbsp;
+                      <!-- tools-installed icon -->
+                      <span class="label label-success" data-bind="visible : tools() == 'Installed'" style="display: inline-block;">
+                        <i class="glyphicon glyphicon-info-sign" style="color:white; font-size: 9pt;"></i>&nbsp;&nbsp;Installed
+                      </span>
+                      <!-- tools-uninstalled icon -->
+                      <span class="label label-default" data-bind="visible : tools() == 'NotInstalled'" style="display: inline-block;">
+                        <i class="glyphicon glyphicon-remove-sign" style="color:white; font-size: 9pt;"></i>&nbsp;&nbsp;NotInstalled
+                      </span>
+                      <!-- tools-unknown icon -->
+                      <span class="label label-primary" data-bind="visible : tools() == 'UnKnownStatus'" style="display: inline-block;">
+                        <i class="glyphicon glyphicon-question-sign" style="color:white; font-size: 9pt;"></i>&nbsp;&nbsp;UnKnown
                       </span>
                     </td>
                     </tr>
@@ -105,12 +118,10 @@
                     <td><span data-bind="text : name"></span></td>
                     <td>
                     <span class="label label-success" data-bind="visible : power() == true" style="display: inline-block; width: 50px;">
-                    <i class="glyphicon glyphicon-ok-sign" style="color:white; font-size: 9pt;"></i>
-                    &nbsp;ON
+                      <i class="glyphicon glyphicon-ok-sign" style="color:white; font-size: 9pt;"></i>&nbsp;&nbsp;ON
                     </span>
                     <span class="label label-danger"  data-bind="visible : power() == false" style="display: inline-block; width: 50px;">
-                    <i class="glyphicon glyphicon-minus-sign" style="color:white; font-size: 9pt;"></i>
-                    &nbsp;OFF
+                      <i class="glyphicon glyphicon-minus-sign" style="color:white; font-size: 9pt;"></i>&nbsp;&nbsp;OFF
                     </span>
                     </td>
                     </tr>

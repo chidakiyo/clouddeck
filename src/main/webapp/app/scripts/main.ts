@@ -20,11 +20,13 @@ module Model {
 		constructor(data:any){
 			this.name(data.name)
 			this.power(data.isOn)
-			this.full(data.full)
+			this.full(data.fullPath)
+			this.tools(data.vmwareToolsStatus)
 		}
 		name = ko.observable()
 		power = ko.observable()
 		full = ko.observable()
+		tools = ko.observable()
 		searchChildren(){
 			return -1 !== new String(this.name()).toUpperCase().indexOf(Init.model.searchfor().toUpperCase());
 		}
