@@ -71,6 +71,12 @@ a{
     }
 }
 
+/* Align span width */
+span.infolabel {
+    display: inline-block;
+    width: 3.1em;
+}
+
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
     .container {
