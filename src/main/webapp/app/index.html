@@ -57,17 +57,30 @@
 			   </thead>
                     <tbody data-bind="visible : $data.child().length > 0, foreach : $data.child">
                     <tr data-bind="visible : searchChildren() == true">
-                    <td>
+                    <td style="vertical-align:middle; ">
                       <span data-bind="text : name"></span>
                     </td>
-                    <td>
+                    <td style="width:160px;"><span class="infolabel">power</span>
                       <!-- power-on icon -->
                       <span class="label label-success" data-bind="visible : power() == true" style="display: inline-block; width: 50px;">
-                        <i class="glyphicon glyphicon-ok-sign" style="color:white; font-size: 9pt;"></i>&nbsp;ON
+                        <i class="glyphicon glyphicon-ok-sign" style="color:white; font-size: 9pt;"></i>&nbsp;&nbsp;ON
                       </span>
                       <!-- power-off icon -->
                       <span class="label label-danger" data-bind="visible : power() == false" style="display: inline-block; width: 50px;">
-                        <i class="glyphicon glyphicon-minus-sign" style="color:white; font-size: 9pt;"></i>&nbsp;OFF
+                        <i class="glyphicon glyphicon-minus-sign" style="color:white; font-size: 9pt;"></i>&nbsp;&nbsp;OFF
+                      </span>
+                      <br /><span class="infolabel">tools</span>
+                      <!-- tools-installed icon -->
+                      <span class="label label-success" data-bind="visible : tools() == 'Installed'" style="display: inline-block;">
+                        <i class="glyphicon glyphicon-info-sign" style="color:white; font-size: 9pt;"></i>&nbsp;&nbsp;Installed
+                      </span>
+                      <!-- tools-uninstalled icon -->
+                      <span class="label label-default" data-bind="visible : tools() == 'NotInstalled'" style="display: inline-block;">
+                        <i class="glyphicon glyphicon-remove-sign" style="color:white; font-size: 9pt;"></i>&nbsp;&nbsp;NotInstalled
+                      </span>
+                      <!-- tools-unknown icon -->
+                      <span class="label label-primary" data-bind="visible : tools() == 'UnKnownStatus'" style="display: inline-block;">
+                        <i class="glyphicon glyphicon-question-sign" style="color:white; font-size: 9pt;"></i>&nbsp;&nbsp;UnKnown
                       </span>
                     </td>
                     </tr>
@@ -97,21 +110,36 @@
 			   <thead>
 			   <tr>
 			   <th>VM Name</th>
-			   <th>Power</th>
+			   <th>Info</th>
 			   </tr>
 			   </thead>
                     <tbody data-bind="foreach : clienthosts">
                     <tr data-bind="visible : searchChildren() == true">
-                    <td><span data-bind="text : name"></span></td>
-                    <td>
-                    <span class="label label-success" data-bind="visible : power() == true" style="display: inline-block; width: 50px;">
-                    <i class="glyphicon glyphicon-ok-sign" style="color:white; font-size: 9pt;"></i>
-                    &nbsp;ON
-                    </span>
-                    <span class="label label-danger"  data-bind="visible : power() == false" style="display: inline-block; width: 50px;">
-                    <i class="glyphicon glyphicon-minus-sign" style="color:white; font-size: 9pt;"></i>
-                    &nbsp;OFF
-                    </span>
+                    <td style="vertical-align:middle; ">
+                      <span data-bind="text : name"></span>
+                    </td>
+                    <td style="width:160px;"><span class="infolabel">power</span>
+                      <!-- power-on icon -->
+                      <span class="label label-success" data-bind="visible : power() == true" style="display: inline-block; width: 50px;">
+                        <i class="glyphicon glyphicon-ok-sign" style="color:white; font-size: 9pt;"></i>&nbsp;&nbsp;ON
+                      </span>
+                      <!-- power-off icon -->
+                      <span class="label label-danger" data-bind="visible : power() == false" style="display: inline-block; width: 50px;">
+                        <i class="glyphicon glyphicon-minus-sign" style="color:white; font-size: 9pt;"></i>&nbsp;&nbsp;OFF
+                      </span>
+                      <br /><span class="infolabel">tools</span>
+                      <!-- tools-installed icon -->
+                      <span class="label label-success" data-bind="visible : tools() == 'Installed'" style="display: inline-block;">
+                        <i class="glyphicon glyphicon-info-sign" style="color:white; font-size: 9pt;"></i>&nbsp;&nbsp;Installed
+                      </span>
+                      <!-- tools-uninstalled icon -->
+                      <span class="label label-default" data-bind="visible : tools() == 'NotInstalled'" style="display: inline-block;">
+                        <i class="glyphicon glyphicon-remove-sign" style="color:white; font-size: 9pt;"></i>&nbsp;&nbsp;NotInstalled
+                      </span>
+                      <!-- tools-unknown icon -->
+                      <span class="label label-primary" data-bind="visible : tools() == 'UnKnownStatus'" style="display: inline-block;">
+                        <i class="glyphicon glyphicon-question-sign" style="color:white; font-size: 9pt;"></i>&nbsp;&nbsp;UnKnown
+                      </span>
                     </td>
                     </tr>
                     </tbody>
