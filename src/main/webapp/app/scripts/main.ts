@@ -5,9 +5,7 @@
 module Model {
 	export class EHost {
 		constructor(data:any){
-			this.name(data.name) // json -> prop
-			this.nickname(data.nickname) // json -> prop
-			this.description(data.description) // json -> prop
+			MappingUtil.map(data, this, Keys.Const.mapE)
 			Net.guest(this.name(), this.child)
 		}
 		name:KnockoutObservable<string> = ko.observable("")
@@ -25,7 +23,7 @@ module Model {
 	}
 	export class CHost {
 		constructor(data:any){
-			this.name(data.name)
+			MappingUtil.map(data, this, Keys.Const.mapC)
 			this.power(data.isOn)
 			this.full(data.fullPath)
 			this.tools(data.vmwareToolsStatus)
@@ -57,10 +55,20 @@ module Keys {
 		static guests = "/api/guests/"
 		static state  = "/api/state"
 	}
+	export class Const {
+		static mapE = ['name', 'nickname', 'description']
+		static mapC = ['name']
+	}
 }
 
 class StringUtil {
   	static deco(word:string){return "[ " + word + " ]"}
+}
+class MappingUtil {
+	static map<T>(json:any, model:T, names:string[]):T {
+		_(names).map((n) => {model[n](json[n])})
+		return model
+	}
 }
 
 class Net {
