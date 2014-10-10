@@ -5,15 +5,22 @@
 module Model {
 	export class EHost {
 		constructor(data:any){
-			this.name(data.name)
+			this.name(data.name) // json -> prop
+			this.nickname(data.nickname) // json -> prop
+			this.description(data.description) // json -> prop
 			Net.guest(this.name(), this.child)
 		}
 		name:KnockoutObservable<string> = ko.observable("")
+		nickname:KnockoutObservable<string> = ko.observable("")
+		description:KnockoutObservable<string> = ko.observable("")
 		child = ko.observableArray()
 		getChildren(){
 			Init.model.svname(this.name())
 			Net.guest(this.name(), Init.model.clienthosts)
 			Init.model.searchfor("")
+		}
+		toHost(){
+			return ((this.nickname() != null) ? StringUtil.deco(this.nickname()) + ' ' : '') + this.name()
 		}
 	}
 	export class CHost {
@@ -50,6 +57,10 @@ module Keys {
 		static guests = "/api/guests/"
 		static state  = "/api/state"
 	}
+}
+
+class StringUtil {
+  	static deco(word:string){return "[" + word + "]"}
 }
 
 class Net {
