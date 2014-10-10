@@ -5,7 +5,7 @@
 module Model {
 	export class EHost {
 		constructor(data:any){
-			MappingUtil.map(data, this, Keys.Const.mapE)
+			MappingUtil.copy(data, this, Keys.Const.mapE)
 			Net.guest(this.name(), this.child)
 		}
 		name:KnockoutObservable<string> = ko.observable("")
@@ -23,7 +23,7 @@ module Model {
 	}
 	export class CHost {
 		constructor(data:any){
-			MappingUtil.map(data, this, Keys.Const.mapC)
+			MappingUtil.copy(data, this, Keys.Const.mapC)
 			this.power(data.isOn)
 			this.full(data.fullPath)
 			this.tools(data.vmwareToolsStatus)
@@ -65,7 +65,7 @@ class StringUtil {
   	static deco(word:string){return "[ " + word + " ]"}
 }
 class MappingUtil {
-	static map<T>(json:any, model:T, names:string[]):T {
+	static copy<T>(json:any, model:T, names:string[]):T {
 		_(names).map((n) => {model[n](json[n])})
 		return model
 	}
