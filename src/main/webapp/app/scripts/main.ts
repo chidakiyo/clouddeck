@@ -5,20 +5,25 @@
 module Model {
 	export class EHost {
 		constructor(data:any){
-			this.name(data.name)
+			MappingUtil.copy(data, this, Keys.Const.mapE)
 			Net.guest(this.name(), this.child)
 		}
 		name:KnockoutObservable<string> = ko.observable("")
+		nickname:KnockoutObservable<string> = ko.observable("")
+		description:KnockoutObservable<string> = ko.observable("")
 		child = ko.observableArray()
 		getChildren(){
 			Init.model.svname(this.name())
 			Net.guest(this.name(), Init.model.clienthosts)
 			Init.model.searchfor("")
 		}
+		toHost(){
+			return ((this.nickname() != null) ? StringUtil.deco(this.nickname()) + ' ' : '') + this.name()
+		}
 	}
 	export class CHost {
 		constructor(data:any){
-			this.name(data.name)
+			MappingUtil.copy(data, this, Keys.Const.mapC)
 			this.power(data.isOn)
 			this.full(data.fullPath)
 			this.tools(data.vmwareToolsStatus)
@@ -49,6 +54,20 @@ module Keys {
 		static hosts  = "/api/hosts"
 		static guests = "/api/guests/"
 		static state  = "/api/state"
+	}
+	export class Const {
+		static mapE = ['name', 'nickname', 'description']
+		static mapC = ['name']
+	}
+}
+
+class StringUtil {
+  	static deco(word:string){return "[ " + word + " ]"}
+}
+class MappingUtil {
+	static copy<T>(json:any, model:T, names:string[]):T {
+		_(names).map((n) => {model[n](json[n])})
+		return model
 	}
 }
 

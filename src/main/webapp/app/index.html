@@ -34,117 +34,117 @@
             </div>
 
             <div class="col-lg-12" style="height:50px;">
-            <button class="btn btn-info" data-bind="click : clear, visible : clienthosts().length > 0">&lt;&lt; Back</button>
-            <div class="form-inline pull-right"><div class="form-group">
-                <label class="control-label" for="searchhost">search target&nbsp;:&nbsp;</label>
-                <input class="form-control" id="searchhost" placeholder="host name" type="search" data-bind="value : searchfor, valueUpdate : 'afterkeydown'" />
-            </div></div>
-            
+                <button class="btn btn-info" data-bind="click : clear, visible : clienthosts().length > 0">&lt;&lt; Back</button>
+                <div class="form-inline pull-right"><div class="form-group">
+                        <label class="control-label" for="searchhost">search target&nbsp;:&nbsp;</label>
+                        <input class="form-control" id="searchhost" placeholder="host name" type="search" data-bind="value : searchfor, valueUpdate : 'afterkeydown'" />
+                    </div></div>
+
             </div>
 
-			<!-- panel a -->
+            <!-- panel a -->
             <div class="row marketing" data-bind="visible : clienthosts().length == 0">
                 <div class="col-lg-12">
 
-                <div class="panel panel-info">
-  				<div class="panel-heading">All ESXi Hosts</div>
+                    <div class="panel panel-info">
+                        <div class="panel-heading">All ESXi Hosts</div>
 
-				<table data-bind="foreach : esxhosts" class="table table-bordered table-hover table-striped table-condensed" >
-				 <thead>
-			   <tr>
-			   <th colspan="2"><a data-bind="text : name, click : getChildren"></a></th>
-			   </tr>
-			   </thead>
-                    <tbody data-bind="visible : $data.child().length > 0, foreach : $data.child">
-                    <tr data-bind="visible : searchChildren() == true">
-                    <td style="vertical-align:middle; ">
-                      <span data-bind="text : name"></span>
-                    </td>
-                    <td style="width:160px;"><span class="infolabel">power</span>
-                      <!-- power-on icon -->
-                      <span class="label label-success" data-bind="visible : power() == true" style="display: inline-block; width: 50px;">
-                        <i class="glyphicon glyphicon-ok-sign" style="color:white; font-size: 9pt;"></i>&nbsp;&nbsp;ON
-                      </span>
-                      <!-- power-off icon -->
-                      <span class="label label-danger" data-bind="visible : power() == false" style="display: inline-block; width: 50px;">
-                        <i class="glyphicon glyphicon-minus-sign" style="color:white; font-size: 9pt;"></i>&nbsp;&nbsp;OFF
-                      </span>
-                      <br /><span class="infolabel">tools</span>
-                      <!-- tools-installed icon -->
-                      <span class="label label-success" data-bind="visible : tools() == 'Installed'" style="display: inline-block;">
-                        <i class="glyphicon glyphicon-info-sign" style="color:white; font-size: 9pt;"></i>&nbsp;&nbsp;Installed
-                      </span>
-                      <!-- tools-uninstalled icon -->
-                      <span class="label label-default" data-bind="visible : tools() == 'NotInstalled'" style="display: inline-block;">
-                        <i class="glyphicon glyphicon-remove-sign" style="color:white; font-size: 9pt;"></i>&nbsp;&nbsp;NotInstalled
-                      </span>
-                      <!-- tools-unknown icon -->
-                      <span class="label label-primary" data-bind="visible : tools() == 'UnKnownStatus'" style="display: inline-block;">
-                        <i class="glyphicon glyphicon-question-sign" style="color:white; font-size: 9pt;"></i>&nbsp;&nbsp;UnKnown
-                      </span>
-                    </td>
-                    </tr>
-                    </tbody>
-                    <tbody data-bind="visible : ($data.child().length > 0) == false">
-                    <tr>
-                    <td>
-                       <img src="images/ajax-loader.gif" alt="loading" style="margin-left: 20px;" />
-                       </td>
-                       </tr>
-                    </tbody>
-                    
-                    </table>
-				</div>
+                        <table data-bind="foreach : esxhosts" class="table table-bordered table-hover table-striped table-condensed" >
+                            <thead>
+                                <tr>
+                                    <th colspan="2"><a data-bind="text : toHost(), click : getChildren"></a></th>
+                                </tr>
+                            </thead>
+                            <tbody data-bind="visible : $data.child().length > 0, foreach : $data.child">
+                                <tr data-bind="visible : searchChildren() == true">
+                                    <td style="vertical-align:middle; ">
+                                        <span data-bind="text : name"></span>
+                                    </td>
+                                    <td style="width:160px;"><span class="infolabel">power</span>
+                                        <!-- power-on icon -->
+                                        <span class="label label-success" data-bind="visible : power() == true" style="display: inline-block; width: 50px;">
+                                            <i class="glyphicon glyphicon-ok-sign" style="color:white; font-size: 9pt;"></i>&nbsp;&nbsp;ON
+                                        </span>
+                                        <!-- power-off icon -->
+                                        <span class="label label-danger" data-bind="visible : power() == false" style="display: inline-block; width: 50px;">
+                                            <i class="glyphicon glyphicon-minus-sign" style="color:white; font-size: 9pt;"></i>&nbsp;&nbsp;OFF
+                                        </span>
+                                        <br /><span class="infolabel">tools</span>
+                                        <!-- tools-installed icon -->
+                                        <span class="label label-success" data-bind="visible : tools() == 'Installed'" style="display: inline-block;">
+                                            <i class="glyphicon glyphicon-info-sign" style="color:white; font-size: 9pt;"></i>&nbsp;&nbsp;Installed
+                                        </span>
+                                        <!-- tools-uninstalled icon -->
+                                        <span class="label label-default" data-bind="visible : tools() == 'NotInstalled'" style="display: inline-block;">
+                                            <i class="glyphicon glyphicon-remove-sign" style="color:white; font-size: 9pt;"></i>&nbsp;&nbsp;NotInstalled
+                                        </span>
+                                        <!-- tools-unknown icon -->
+                                        <span class="label label-primary" data-bind="visible : tools() == 'UnKnownStatus'" style="display: inline-block;">
+                                            <i class="glyphicon glyphicon-question-sign" style="color:white; font-size: 9pt;"></i>&nbsp;&nbsp;UnKnown
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tbody data-bind="visible : ($data.child().length > 0) == false">
+                                <tr>
+                                    <td>
+                                        <img src="images/ajax-loader.gif" alt="loading" style="margin-left: 20px;" />
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+                    </div>
 
                 </div>
             </div>
 
-			<!-- panel b -->
+            <!-- panel b -->
             <div class="row marketing" data-bind="visible : clienthosts().length > 0">
                 <div class="col-lg-12">
 
-                        <div class="panel panel-info">
-  				<div class="panel-heading">All <span data-bind="text : svname"></span> Guests</div>
+                    <div class="panel panel-info">
+                        <div class="panel-heading">All <span data-bind="text : svname"></span> Guests</div>
 
-			   <table class="table table-bordered table-hover table-striped table-condensed" >
-			   <thead>
-			   <tr>
-			   <th>VM Name</th>
-			   <th>Info</th>
-			   </tr>
-			   </thead>
-                    <tbody data-bind="foreach : clienthosts">
-                    <tr data-bind="visible : searchChildren() == true">
-                    <td style="vertical-align:middle; ">
-                      <span data-bind="text : name"></span>
-                    </td>
-                    <td style="width:160px;"><span class="infolabel">power</span>
-                      <!-- power-on icon -->
-                      <span class="label label-success" data-bind="visible : power() == true" style="display: inline-block; width: 50px;">
-                        <i class="glyphicon glyphicon-ok-sign" style="color:white; font-size: 9pt;"></i>&nbsp;&nbsp;ON
-                      </span>
-                      <!-- power-off icon -->
-                      <span class="label label-danger" data-bind="visible : power() == false" style="display: inline-block; width: 50px;">
-                        <i class="glyphicon glyphicon-minus-sign" style="color:white; font-size: 9pt;"></i>&nbsp;&nbsp;OFF
-                      </span>
-                      <br /><span class="infolabel">tools</span>
-                      <!-- tools-installed icon -->
-                      <span class="label label-success" data-bind="visible : tools() == 'Installed'" style="display: inline-block;">
-                        <i class="glyphicon glyphicon-info-sign" style="color:white; font-size: 9pt;"></i>&nbsp;&nbsp;Installed
-                      </span>
-                      <!-- tools-uninstalled icon -->
-                      <span class="label label-default" data-bind="visible : tools() == 'NotInstalled'" style="display: inline-block;">
-                        <i class="glyphicon glyphicon-remove-sign" style="color:white; font-size: 9pt;"></i>&nbsp;&nbsp;NotInstalled
-                      </span>
-                      <!-- tools-unknown icon -->
-                      <span class="label label-primary" data-bind="visible : tools() == 'UnKnownStatus'" style="display: inline-block;">
-                        <i class="glyphicon glyphicon-question-sign" style="color:white; font-size: 9pt;"></i>&nbsp;&nbsp;UnKnown
-                      </span>
-                    </td>
-                    </tr>
-                    </tbody>
-                    </table>
-				</div>
+                        <table class="table table-bordered table-hover table-striped table-condensed" >
+                            <thead>
+                                <tr>
+                                    <th>VM Name</th>
+                                    <th>Info</th>
+                                </tr>
+                            </thead>
+                            <tbody data-bind="foreach : clienthosts">
+                                <tr data-bind="visible : searchChildren() == true">
+                                    <td style="vertical-align:middle; ">
+                                        <span data-bind="text : name"></span>
+                                    </td>
+                                    <td style="width:160px;"><span class="infolabel">power</span>
+                                        <!-- power-on icon -->
+                                        <span class="label label-success" data-bind="visible : power() == true" style="display: inline-block; width: 50px;">
+                                            <i class="glyphicon glyphicon-ok-sign" style="color:white; font-size: 9pt;"></i>&nbsp;&nbsp;ON
+                                        </span>
+                                        <!-- power-off icon -->
+                                        <span class="label label-danger" data-bind="visible : power() == false" style="display: inline-block; width: 50px;">
+                                            <i class="glyphicon glyphicon-minus-sign" style="color:white; font-size: 9pt;"></i>&nbsp;&nbsp;OFF
+                                        </span>
+                                        <br /><span class="infolabel">tools</span>
+                                        <!-- tools-installed icon -->
+                                        <span class="label label-success" data-bind="visible : tools() == 'Installed'" style="display: inline-block;">
+                                            <i class="glyphicon glyphicon-info-sign" style="color:white; font-size: 9pt;"></i>&nbsp;&nbsp;Installed
+                                        </span>
+                                        <!-- tools-uninstalled icon -->
+                                        <span class="label label-default" data-bind="visible : tools() == 'NotInstalled'" style="display: inline-block;">
+                                            <i class="glyphicon glyphicon-remove-sign" style="color:white; font-size: 9pt;"></i>&nbsp;&nbsp;NotInstalled
+                                        </span>
+                                        <!-- tools-unknown icon -->
+                                        <span class="label label-primary" data-bind="visible : tools() == 'UnKnownStatus'" style="display: inline-block;">
+                                            <i class="glyphicon glyphicon-question-sign" style="color:white; font-size: 9pt;"></i>&nbsp;&nbsp;UnKnown
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
                 </div>
             </div>
@@ -162,24 +162,24 @@
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
-									/*
-																(function(b, o, i, l, e, r) {
-																	b.GoogleAnalyticsObject = l;
-																	b[l]
-																			|| (b[l] = function() {
-																				(b[l].q = b[l].q || [])
-																						.push(arguments)
-																			});
-																	b[l].l = +new Date;
-																	e = o.createElement(i);
-																	r = o.getElementsByTagName(i)[0];
-																	e.src = '//www.google-analytics.com/analytics.js';
-																	r.parentNode.insertBefore(e, r)
-																}(window, document, 'script', 'ga'));
-																ga('create', 'UA-XXXXX-X');
-																ga('send', 'pageview');
-									 */
-								</script>
+                                                                        /*
+                                                                                                                                (function(b, o, i, l, e, r) {
+                                                                                                                                        b.GoogleAnalyticsObject = l;
+                                                                                                                                        b[l]
+                                                                                                                                                        || (b[l] = function() {
+                                                                                                                                                                (b[l].q = b[l].q || [])
+                                                                                                                                                                                .push(arguments)
+                                                                                                                                                        });
+                                                                                                                                        b[l].l = +new Date;
+                                                                                                                                        e = o.createElement(i);
+                                                                                                                                        r = o.getElementsByTagName(i)[0];
+                                                                                                                                        e.src = '//www.google-analytics.com/analytics.js';
+                                                                                                                                        r.parentNode.insertBefore(e, r)
+                                                                                                                                }(window, document, 'script', 'ga'));
+                                                                                                                                ga('create', 'UA-XXXXX-X');
+                                                                                                                                ga('send', 'pageview');
+                                                                         */
+        </script>
 
         <!-- build:js scripts/plugins.js -->
         <script src="bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/affix.js"></script>
@@ -199,5 +199,5 @@
         <!-- build:js({app,.tmp}) scripts/main.js -->
         <script src="scripts/main.js"></script>
         <!-- endbuild -->
-</body>
+    </body>
 </html>
