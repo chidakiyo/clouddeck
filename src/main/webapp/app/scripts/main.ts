@@ -60,7 +60,7 @@ module Keys {
 }
 
 class StringUtil {
-  	static deco(word:string){return "[" + word + "]"}
+  	static deco(word:string){return "[ " + word + " ]"}
 }
 
 class Net {
