@@ -5,7 +5,7 @@
 module Model {
 	export class EHost {
 		constructor(data:any){
-			MappingUtil.copy(data, this, Keys.Const.mapE)
+			MappingUtil.copy(data, this)
 			Net.guest(this.name(), this.child)
 		}
 		name:KnockoutObservable<string> = ko.observable("")
@@ -18,20 +18,18 @@ module Model {
 			Init.model.searchfor("")
 		}
 		toHost(){
-			return ((this.nickname() != null) ? StringUtil.deco(this.nickname()) + ' ' : '') + this.name()
+			return ((!!this.nickname()) ? StringUtil.deco(this.nickname()) + ' ' : '') + this.name()
 		}
 	}
 	export class CHost {
 		constructor(data:any){
-			MappingUtil.copy(data, this, Keys.Const.mapC)
-			this.power(data.isOn)
-			this.full(data.fullPath)
-			this.tools(data.vmwareToolsStatus)
+			MappingUtil.copy(data, this)
+			this.isOn(data.isOn)
 		}
-		name = ko.observable()
-		power = ko.observable()
-		full = ko.observable()
-		tools = ko.observable()
+		name:KnockoutObservable<string> = ko.observable("")
+		isOn:KnockoutObservable<boolean> = ko.observable(false)
+		fullPath:KnockoutObservable<string> = ko.observable("")
+		vmwareToolsStatus:KnockoutObservable<string> = ko.observable("")
 		searchChildren(){
 			return -1 !== new String(this.name()).toUpperCase().indexOf(Init.model.searchfor().toUpperCase());
 		}
@@ -55,18 +53,19 @@ module Keys {
 		static guests = "/api/guests/"
 		static state  = "/api/state"
 	}
-	export class Const {
-		static mapE = ['name', 'nickname', 'description']
-		static mapC = ['name']
-	}
+	
 }
 
 class StringUtil {
   	static deco(word:string){return "[ " + word + " ]"}
 }
 class MappingUtil {
-	static copy<T>(json:any, model:T, names:string[]):T {
-		_(names).map((n) => {model[n](json[n])})
+	static copy<T>(json:any, model:T):T {
+		_(json).map((v,k) => {
+			if(!_(model[k]).isUndefined()){
+				model[k](json[k])
+			}
+		})
 		return model
 	}
 }

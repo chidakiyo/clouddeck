@@ -62,24 +62,24 @@
                                     </td>
                                     <td style="width:160px;"><span class="infolabel">power</span>
                                         <!-- power-on icon -->
-                                        <span class="label label-success" data-bind="visible : power() == true" style="display: inline-block; width: 50px;">
+                                        <span class="label label-success" data-bind="visible : isOn() == true" style="display: inline-block; width: 50px;">
                                             <i class="glyphicon glyphicon-ok-sign" style="color:white; font-size: 9pt;"></i>&nbsp;&nbsp;ON
                                         </span>
                                         <!-- power-off icon -->
-                                        <span class="label label-danger" data-bind="visible : power() == false" style="display: inline-block; width: 50px;">
+                                        <span class="label label-danger" data-bind="visible : isOn() == false" style="display: inline-block; width: 50px;">
                                             <i class="glyphicon glyphicon-minus-sign" style="color:white; font-size: 9pt;"></i>&nbsp;&nbsp;OFF
                                         </span>
                                         <br /><span class="infolabel">tools</span>
                                         <!-- tools-installed icon -->
-                                        <span class="label label-success" data-bind="visible : tools() == 'Installed'" style="display: inline-block;">
-                                            <i class="glyphicon glyphicon-download-alt" style="color:white; font-size: 9pt;"></i>&nbsp;&nbsp;<span data-bind="text:tools()"></span>
+                                        <span class="label label-success" data-bind="visible : vmwareToolsStatus() == 'Installed'" style="display: inline-block;">
+                                            <i class="glyphicon glyphicon-download-alt" style="color:white; font-size: 9pt;"></i>&nbsp;&nbsp;<span data-bind="text:vmwareToolsStatus()"></span>
                                         </span>
                                         <!-- tools-uninstalled icon -->
-                                        <span class="label label-default" data-bind="visible : tools() !== 'Installed' && tools() !== undefined" style="display: inline-block;">
-                                            <i class="glyphicon glyphicon-ban-circle" style="color:white; font-size: 9pt;"></i>&nbsp;&nbsp;<span data-bind="text:tools()"></span>
+                                        <span class="label label-default" data-bind="visible : vmwareToolsStatus() !== 'Installed' && vmwareToolsStatus() !== ''" style="display: inline-block;">
+                                            <i class="glyphicon glyphicon-ban-circle" style="color:white; font-size: 9pt;"></i>&nbsp;&nbsp;<span data-bind="text:vmwareToolsStatus()"></span>
                                         </span>
                                         <!-- tools-unknown icon -->
-                                        <span class="label label-default" data-bind="visible : tools() == undefined" style="display: inline-block;">
+                                        <span class="label label-default" data-bind="visible : vmwareToolsStatus() == ''" style="display: inline-block;">
                                             <i class="glyphicon glyphicon-question-sign" style="color:white; font-size: 9pt;"></i>&nbsp;&nbsp;UnKnown
                                         </span>
                                     </td>
@@ -120,24 +120,24 @@
                                     </td>
                                     <td style="width:160px;"><span class="infolabel">power</span>
                                         <!-- power-on icon -->
-                                        <span class="label label-success" data-bind="visible : power() == true" style="display: inline-block; width: 50px;">
+                                        <span class="label label-success" data-bind="visible : isOn() == true" style="display: inline-block; width: 50px;">
                                             <i class="glyphicon glyphicon-ok-sign" style="color:white; font-size: 9pt;"></i>&nbsp;&nbsp;ON
                                         </span>
                                         <!-- power-off icon -->
-                                        <span class="label label-danger" data-bind="visible : power() == false" style="display: inline-block; width: 50px;">
+                                        <span class="label label-danger" data-bind="visible : isOn() == false" style="display: inline-block; width: 50px;">
                                             <i class="glyphicon glyphicon-minus-sign" style="color:white; font-size: 9pt;"></i>&nbsp;&nbsp;OFF
                                         </span>
                                         <br /><span class="infolabel">tools</span>
                                         <!-- tools-installed icon -->
-                                        <span class="label label-success" data-bind="visible : tools() == 'Installed'" style="display: inline-block;">
-                                            <i class="glyphicon glyphicon-download-alt" style="color:white; font-size: 9pt;"></i>&nbsp;&nbsp;<span data-bind="text:tools()"></span>
+                                        <span class="label label-success" data-bind="visible : vmwareToolsStatus() == 'Installed'" style="display: inline-block;">
+                                            <i class="glyphicon glyphicon-download-alt" style="color:white; font-size: 9pt;"></i>&nbsp;&nbsp;<span data-bind="text:vmwareToolsStatus()"></span>
                                         </span>
                                         <!-- tools-uninstalled icon -->
-                                        <span class="label label-default" data-bind="visible : tools() !== 'Installed' && tools() !== undefined" style="display: inline-block;">
-                                            <i class="glyphicon glyphicon-ban-circle" style="color:white; font-size: 9pt;"></i>&nbsp;&nbsp;<span data-bind="text:tools()"></span>
+                                        <span class="label label-default" data-bind="visible : vmwareToolsStatus() !== 'Installed' && vmwareToolsStatus() !== undefined" style="display: inline-block;">
+                                            <i class="glyphicon glyphicon-ban-circle" style="color:white; font-size: 9pt;"></i>&nbsp;&nbsp;<span data-bind="text:vmwareToolsStatus()"></span>
                                         </span>
                                         <!-- tools-unknown icon -->
-                                        <span class="label label-default" data-bind="visible : tools() == undefined" style="display: inline-block;">
+                                        <span class="label label-default" data-bind="visible : vmwareToolsStatus() == undefined" style="display: inline-block;">
                                             <i class="glyphicon glyphicon-question-sign" style="color:white; font-size: 9pt;"></i>&nbsp;&nbsp;UnKnown
                                         </span>
                                     </td>
