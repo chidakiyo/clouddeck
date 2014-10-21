@@ -12,3 +12,4 @@ test-output/
 .project
 .settings/
 src/main/webapp/app/scripts/*.js
+project/activator-sbt-*
