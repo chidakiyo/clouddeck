@@ -17,14 +17,15 @@ object VIJavaCommandBuilder {
 
   /** ESXi server host info */
   def host()(implicit info: ConnectInfo): Host = {
-    val si = new ServiceInstance(new URL(s"https://${info.host}/sdk"), info.user, info.pass, true)
-    val hostManagedEntities = new InventoryNavigator(si.getRootFolder()).searchManagedEntities("HostSystem")
-    val hostSystem = hostManagedEntities(0).asInstanceOf[HostSystem]
-    val dataStorages = hostSystem.getDatastores().map { d =>
-      DataStorage(d.getSummary().getName(), d.getSummary().getCapacity(), d.getSummary().getFreeSpace())
-    }.toList
-    si.getServerConnection().logout()
-    Host(info.host, info.nickname, info.description, dataStorages)
+    /* #pending# esxi infomation fetch */
+    //    val si = new ServiceInstance(new URL(s"https://${info.host}/sdk"), info.user, info.pass, true)
+    //    val hostManagedEntities = new InventoryNavigator(si.getRootFolder()).searchManagedEntities("HostSystem")
+    //    val hostSystem = hostManagedEntities(0).asInstanceOf[HostSystem]
+    //    val dataStorages = hostSystem.getDatastores().map { d =>
+    //      DataStorage(d.getSummary().getName(), d.getSummary().getCapacity(), d.getSummary().getFreeSpace())
+    //    }.toList
+    //    si.getServerConnection().logout()
+    Host(info.host, info.nickname, info.description)
   }
 
   /** get guest os list */
