@@ -71,10 +71,16 @@ a{
     }
 }
 
+/* Align span width */
+span.infolabel {
+    display: inline-block;
+    width: 3.1em;
+}
+
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
     .container {
-        max-width: 730px;
+        max-width: 920px;
     }
 
     /* Remove the padding we set earlier */
@@ -95,3 +101,11 @@ a{
         border-bottom: 0;
     }
 }
+
+.state_icon {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    padding: 0 auto;
+}
+

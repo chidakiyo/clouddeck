@@ -8,8 +8,25 @@ import com.vmware.vim25.mo.VirtualMachine
 import com.vmware.vim25.VirtualMachineRuntimeInfo
 import com.vmware.vim25.VirtualMachinePowerState
 import clouddeck.util.VMwareTools
+import com.vmware.vim25.mo.InventoryNavigator
+import com.vmware.vim25.mo.HostSystem
+import clouddeck.util.Host
+import clouddeck.util.DataStorage
 
 object VIJavaCommandBuilder {
+
+  /** ESXi server host info */
+  def host()(implicit info: ConnectInfo): Host = {
+    /* #pending# esxi infomation fetch */
+    //    val si = new ServiceInstance(new URL(s"https://${info.host}/sdk"), info.user, info.pass, true)
+    //    val hostManagedEntities = new InventoryNavigator(si.getRootFolder()).searchManagedEntities("HostSystem")
+    //    val hostSystem = hostManagedEntities(0).asInstanceOf[HostSystem]
+    //    val dataStorages = hostSystem.getDatastores().map { d =>
+    //      DataStorage(d.getSummary().getName(), d.getSummary().getCapacity(), d.getSummary().getFreeSpace())
+    //    }.toList
+    //    si.getServerConnection().logout()
+    Host(info.host, info.nickname, info.description)
+  }
 
   /** get guest os list */
   def guestList()(implicit info: ConnectInfo): List[VMX] = {
@@ -18,7 +35,7 @@ object VIJavaCommandBuilder {
 
   /** guest os power status */
   def guestState(name: String)(implicit info: ConnectInfo): Option[VMX] = {
-    val vmxs = base()
+    val vmxs = guestList()
     vmxs.find(_.name == name)
   }
 

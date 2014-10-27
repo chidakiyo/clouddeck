@@ -1,15 +1,32 @@
 {
   "success": {
     "data": [{
-      "name": "192.168.1.1"
+      "name": "192.168.1.1",
+      "nickname": "ホスト名1",
+      "description": "ホストの説明1",
+      "dataStorages": [{
+        "name": "datastore1 (1)",
+        "capacity": 728533827584,
+        "freeSpace": 169842049024
+      }]
     }, {
-      "name": "192.168.1.2"
+      "name": "192.168.1.2",
+      "nickname": "ホスト名2",
+      "dataStorages": [{
+      "name": "datastore1 (2)",
+      "capacity": 728802263040,
+      "freeSpace": 345595969536
+      }]
     }, {
-      "name": "192.168.1.3"
+      "name": "192.168.1.3",
+      "description": "ホストの説明3",
+      "dataStorages": []
     }, {
-      "name": "192.168.1.4"
+      "name": "192.168.1.4",
+      "dataStorages": []
     }, {
-      "name": "192.168.1.5"
+      "name": "192.168.1.5",
+      "dataStorages": []
     }]
   }
 }

@@ -5,34 +5,44 @@
 module Model {
 	export class EHost {
 		constructor(data:any){
-			this.name(data.name)
+			MappingUtil.copy(data, this)
 			Net.guest(this.name(), this.child)
 		}
 		name:KnockoutObservable<string> = ko.observable("")
+		nickname:KnockoutObservable<string> = ko.observable("")
+		description:KnockoutObservable<string> = ko.observable("")
 		child = ko.observableArray()
 		getChildren(){
 			Init.model.svname(this.name())
 			Net.guest(this.name(), Init.model.clienthosts)
+			Init.model.searchfor("")
+		}
+		toHost(){
+			return ((!!this.nickname()) ? StringUtil.deco(this.nickname()) + ' ' : '') + this.name()
 		}
 	}
 	export class CHost {
 		constructor(data:any){
-			this.name(data.name)
-			this.power(data.isOn)
-			this.full(data.full)
+			MappingUtil.copy(data, this)
+			this.isOn(data.isOn)
 		}
-		name = ko.observable()
-		power = ko.observable()
-		full = ko.observable()
+		name:KnockoutObservable<string> = ko.observable("")
+		isOn:KnockoutObservable<boolean> = ko.observable(false)
+		fullPath:KnockoutObservable<string> = ko.observable("")
+		vmwareToolsStatus:KnockoutObservable<string> = ko.observable("")
+		searchChildren(){
+			return -1 !== new String(this.name()).toUpperCase().indexOf(Init.model.searchfor().toUpperCase());
+		}
 	}
 
 	export class Vmodel {
 		esxhosts = ko.observableArray()
-
 		svname = ko.observable()
 		clienthosts = ko.observableArray()
+		searchfor = ko.observable("")
 		clear(){
 			Init.model.clienthosts.removeAll()
+			Init.model.searchfor("")
 		}
 	}
 }
@@ -42,6 +52,21 @@ module Keys {
 		static hosts  = "/api/hosts"
 		static guests = "/api/guests/"
 		static state  = "/api/state"
+	}
+	
+}
+
+class StringUtil {
+  	static deco(word:string){return "[ " + word + " ]"}
+}
+class MappingUtil {
+	static copy<T>(json:any, model:T):T {
+		_(json).map((v,k) => {
+			if(!_(model[k]).isUndefined()){
+				model[k](json[k])
+			}
+		})
+		return model
 	}
 }
 
@@ -64,9 +89,9 @@ class Net {
 // initializer
 class Init {
 	static DEBUG:boolean = false
-	static model:Model.Vmodel
+	static model = new Model.Vmodel()
 	constructor(){
-		Init.model = new Model.Vmodel()
+		$.ajaxSetup({ cache: false }); // disable cache
 		ko.applyBindings(Init.model)
 		Net.host(Init.model.esxhosts)
 	}

@@ -11,7 +11,7 @@ object Expression {
     import spray.json._
     import HostJsonProtocol._
     import ResultJsonProtocol._
-    val hosts = ConfigUtil.connectInfos.map(c => Host(c.host))
+    val hosts: List[Host] = ConfigUtil.connectInfos.map(c => VIJavaCommandBuilder.host()(c))
     Result[Host](success = Some(Success(hosts))).toJson.prettyPrint
   }
 
