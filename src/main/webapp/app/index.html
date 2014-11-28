@@ -57,13 +57,20 @@
 							<tbody data-bind="visible : $data.child().length > 0, foreach : $data.child">
 								<tr data-bind="visible : searchChildren() == true">
 									<td style="vertical-align:middle; ">
+									    
+									    <!-- Image Name -->
 										<span data-bind="text : name"></span>
+										
+										<!-- IP Address -->
 										<span data-bind="visible : $data.ip() != '' && $data.ip() != 'unknown'">
 										    [ <span data-bind="text : ip"></span> ]
 										</span>
+										
+										<!-- Host Name -->
 										<span data-bind="visible : $data.host() != '' && $data.host() != 'unknown'">
 										    [ <span data-bind="text : host"></span> ]
 										</span>
+										
 									</td>
 									<td style="width:160px;">
 
@@ -122,7 +129,20 @@
 							<tbody data-bind="foreach : clienthosts">
 								<tr data-bind="visible : searchChildren() == true">
 									<td style="vertical-align:middle; ">
+                                    
+								        <!-- Image Name -->
 										<span data-bind="text : name"></span>
+										
+										<!-- IP Address -->
+										<span data-bind="visible : $data.ip() != '' && $data.ip() != 'unknown'">
+										    [ <span data-bind="text : ip"></span> ]
+										</span>
+										
+										<!-- Host Name -->
+										<span data-bind="visible : $data.host() != '' && $data.host() != 'unknown'">
+										    [ <span data-bind="text : host"></span> ]
+										</span>
+										
 									</td>
 									<td style="width:160px;">
 
