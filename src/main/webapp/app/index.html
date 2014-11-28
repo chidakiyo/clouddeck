@@ -58,6 +58,12 @@
 								<tr data-bind="visible : searchChildren() == true">
 									<td style="vertical-align:middle; ">
 										<span data-bind="text : name"></span>
+										<span data-bind="visible : $data.ip() != '' && $data.ip() != 'unknown'">
+										    [ <span data-bind="text : ip"></span> ]
+										</span>
+										<span data-bind="visible : $data.host() != '' && $data.host() != 'unknown'">
+										    [ <span data-bind="text : host"></span> ]
+										</span>
 									</td>
 									<td style="width:160px;">
 

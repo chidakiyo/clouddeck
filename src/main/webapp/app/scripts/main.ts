@@ -27,6 +27,8 @@ module Model {
 			this.isOn(data.isOn)
 		}
 		name:KnockoutObservable<string> = ko.observable("")
+		ip:KnockoutObservable<string> = ko.observable("")
+		host:KnockoutObservable<string> = ko.observable("")
 		isOn:KnockoutObservable<boolean> = ko.observable(false)
 		fullPath:KnockoutObservable<string> = ko.observable("")
 		vmwareToolsStatus:KnockoutObservable<string> = ko.observable("")
