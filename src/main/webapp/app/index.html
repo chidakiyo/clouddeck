@@ -62,36 +62,36 @@
 										<span data-bind="text : name"></span>
 										
 										<!-- IP Address -->
-										<span data-bind="visible : $data.ip() != '' && $data.ip() != 'unknown'">
+										<span data-bind="visible : $data.ip() != '' && $data.ip() !== 'unknown'">
 										    [ <span data-bind="text : ip"></span> ]
 										</span>
 										
 										<!-- Host Name -->
-										<span data-bind="visible : $data.host() != '' && $data.host() != 'unknown'">
+										<span data-bind="visible : $data.host() != '' && $data.host() !== 'unknown'">
 										    [ <span data-bind="text : host"></span> ]
 										</span>
 										
 									</td>
 									<td style="width:160px;">
 
-										<!-- power-on icon -->
-										<span class="label label-success state_icon" data-bind="visible : isOn() == true">
+								        <!-- power-on icon -->
+										<span class="label label-success state_icon" data-bind="visible : isOn() == true" title="Power ON">
 											<i class="glyphicon glyphicon-ok-sign" style="color:white; font-size: 9pt; margin-top: 3px;"></i>
 										</span>
 										<!-- power-off icon -->
-										<span class="label label-default state_icon" data-bind="visible : isOn() == false">
+										<span class="label label-default state_icon" data-bind="visible : isOn() == false" title="Power OFF">
 											<i class="glyphicon glyphicon-ok-sign" style="color:white; font-size: 9pt; margin-top: 3px;"></i>
 										</span>
 
 										<!-- tools-installed icon -->
-										<span class="label label-success state_icon" data-bind="visible : vmwareToolsStatus() == 'Installed'">
+										<span class="label label-success state_icon" data-bind="visible : vmwareToolsStatus() == 'Installed'" title="VMWareTools Installed">
 											<i class="glyphicon glyphicon-wrench" style="color:white; font-size: 9pt; margin-top: 3px;"></i>
 										</span>
 										<!-- tools-uninstalled icon -->
-										<span class="label label-default state_icon" data-bind="visible : vmwareToolsStatus() !== 'Installed' && vmwareToolsStatus() !== ''">
+										<span class="label label-default state_icon" data-bind="visible : vmwareToolsStatus() !== 'Installed' && vmwareToolsStatus() !== ''" title="VMWareTools Not Installed">
 											<i class="glyphicon glyphicon-wrench" style="color:white; font-size: 9pt; margin-top: 3px;"></i>
 										</span>
-										<span class="label label-default state_icon" data-bind="visible : vmwareToolsStatus() == ''">
+										<span class="label label-default state_icon" data-bind="visible : vmwareToolsStatus() == ''" title="VMWareTools Not Installed">
 											<i class="glyphicon glyphicon-wrench" style="color:white; font-size: 9pt; margin-top: 3px;"></i>
 										</span>
 
@@ -134,36 +134,36 @@
 										<span data-bind="text : name"></span>
 										
 										<!-- IP Address -->
-										<span data-bind="visible : $data.ip() != '' && $data.ip() != 'unknown'">
+										<span data-bind="visible : $data.ip() != '' && $data.ip() !== 'unknown'">
 										    [ <span data-bind="text : ip"></span> ]
 										</span>
 										
 										<!-- Host Name -->
-										<span data-bind="visible : $data.host() != '' && $data.host() != 'unknown'">
+										<span data-bind="visible : $data.host() != '' && $data.host() !== 'unknown'">
 										    [ <span data-bind="text : host"></span> ]
 										</span>
 										
 									</td>
 									<td style="width:160px;">
 
-											<!-- power-on icon -->
-										<span class="label label-success state_icon" data-bind="visible : isOn() == true">
+								        <!-- power-on icon -->
+										<span class="label label-success state_icon" data-bind="visible : isOn() == true" title="Power ON">
 											<i class="glyphicon glyphicon-ok-sign" style="color:white; font-size: 9pt; margin-top: 3px;"></i>
 										</span>
 										<!-- power-off icon -->
-										<span class="label label-default state_icon" data-bind="visible : isOn() == false">
+										<span class="label label-default state_icon" data-bind="visible : isOn() == false" title="Power OFF">
 											<i class="glyphicon glyphicon-ok-sign" style="color:white; font-size: 9pt; margin-top: 3px;"></i>
 										</span>
 
 										<!-- tools-installed icon -->
-										<span class="label label-success state_icon" data-bind="visible : vmwareToolsStatus() == 'Installed'">
+										<span class="label label-success state_icon" data-bind="visible : vmwareToolsStatus() == 'Installed'" title="VMWareTools Installed">
 											<i class="glyphicon glyphicon-wrench" style="color:white; font-size: 9pt; margin-top: 3px;"></i>
 										</span>
 										<!-- tools-uninstalled icon -->
-										<span class="label label-default state_icon" data-bind="visible : vmwareToolsStatus() !== 'Installed' && vmwareToolsStatus() !== ''">
+										<span class="label label-default state_icon" data-bind="visible : vmwareToolsStatus() !== 'Installed' && vmwareToolsStatus() !== ''" title="VMWareTools Not Installed">
 											<i class="glyphicon glyphicon-wrench" style="color:white; font-size: 9pt; margin-top: 3px;"></i>
 										</span>
-										<span class="label label-default state_icon" data-bind="visible : vmwareToolsStatus() == ''">
+										<span class="label label-default state_icon" data-bind="visible : vmwareToolsStatus() == ''" title="VMWareTools Not Installed">
 											<i class="glyphicon glyphicon-wrench" style="color:white; font-size: 9pt; margin-top: 3px;"></i>
 										</span>
 
