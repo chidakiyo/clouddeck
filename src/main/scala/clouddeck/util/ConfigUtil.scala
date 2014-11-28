@@ -13,7 +13,7 @@ object ConfigUtil {
 
   def conf(): String = FileUtil.readAll(Directory.AppConf)
 
-  def connectInfos(): List[ConnectInfo] = parseNamedConnectInfosJson(conf()).root
+  def connectInfos(): List[ConnectInfo] = parseNamedConnectInfosJson(conf()).root.filter(_.disable == None)
 
   val default: NamedConnectInfos = NamedConnectInfos(List(ConnectInfo("localhost", "admin", "pass"), ConnectInfo("localhost2", "admin2", "pass2")))
 

@@ -7,7 +7,7 @@ import clouddeck.command.ConnectInfo
 case class NamedConnectInfos(root: List[ConnectInfo])
 
 object MyJsonProtocol extends DefaultJsonProtocol {
-  implicit val connectInfoFormat = jsonFormat5(ConnectInfo)
+  implicit val connectInfoFormat = jsonFormat6(ConnectInfo)
   implicit val namedListFormat = jsonFormat1(NamedConnectInfos)
 }
 
